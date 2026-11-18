@@ -22,7 +22,7 @@ EMERG_TEL  = "+919966994859"
 EMAIL      = "info@wecaremana.com"
 ADDRESS    = "Plot No. 219, beside SBI Bank,<br>Mahadevapuram Colony, Gajularamaram,<br>Hyderabad — 500072"
 WA         = "https://wa.me/917995895858"
-ASSET_V    = "20261118l"   # bump when site.css / *.js change so browsers fetch the new files
+ASSET_V    = "20261118m"   # bump when site.css / *.js change so browsers fetch the new files
 # Google Business listing (from the client's share link) — pin at 17.5166458, 78.4144235
 MAPS_LISTING = "https://share.google/QCrYoUiRkgj39kQA7"
 MAPS_DIR     = "https://www.google.com/maps/dir/?api=1&amp;destination=17.5166458%2C78.4144235"
@@ -244,7 +244,7 @@ DOCTORS = [
     ("Dr. Mohammed Adil Faraz", "General Surgeon", "MBBS, MS", "surgery", "adil-faraz"),
     ("Dr. Bagam Mahesh", "Orthopaedic Surgeon", "MBBS, D.Ortho, DNB", "ortho", "bagam-mahesh"),
     ("Dr. Ch. Divya", "FNB Consultant", "MBBS, MRCP, MRCPCH", "womens", None),
-    ("Dr. G. Vaishnavi", "Diabetologist", "MD — Consultant", "medicine", None),
+    ("Dr. G. Vaishnavi", "Consultant Paediatrician", "MD Paediatrics", "womens", "g-vaishnavi"),
     ("Dr. Manisha M", "ENT Surgeon", "MBBS, DLO — Consultant ENT", "other", "manisha-m"),
 ]
 DOC_BY_NAME = {d[0]: d for d in DOCTORS}
@@ -362,7 +362,7 @@ SPECIALITIES = [
                "sugar, thyroid function, cholesterol, CBC — is run on site with same-day results, so treatment "
                "usually begins at the same visit.",
         doctors=["Dr. Kosuri Akhila", "Dr. Sasikanth Reddy P", "Dr. Vidyala Harika",
-                 "Dr. G. Vaishnavi", "Dr. M. Kiran Kumar"],
+                 "Dr. M. Kiran Kumar"],
         faqs=[("What does a general physician treat?",
                "A general physician diagnoses and manages a wide range of adult conditions including fever, "
                "infections, diabetes, hypertension and thyroid disorders — and coordinates referral to a "

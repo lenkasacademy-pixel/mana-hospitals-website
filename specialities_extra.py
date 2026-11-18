@@ -113,7 +113,7 @@ EXTRA_SPECIALITIES = [
               "Concerns about weight, height, speech or development"],
         expect="Bring your child's vaccination card and any previous prescriptions. Most illnesses are "
                "assessed and treated at the same visit, with lab tests on site when needed.",
-        doctors=["Dr. Shivaiahgari Vinaykumar", "Dr. Ch. Divya"],
+        doctors=["Dr. Shivaiahgari Vinaykumar", "Dr. G. Vaishnavi", "Dr. Ch. Divya"],
         faqs=[("When should I take my child to emergency?",
                "Come straight in for difficulty breathing, a seizure, severe dehydration, a very drowsy or "
                "floppy child, or any fever in a baby under three months. Our emergency department is open 24×7."),
@@ -304,7 +304,7 @@ EXTRA_SPECIALITIES = [
               "Tiredness, weight change or swelling in the neck (thyroid)"],
         expect="Come fasting if possible so sugar and lipid tests can be done at the same visit. Bring your "
                "medicine list and any glucometer readings.",
-        doctors=["Dr. Kosuri Akhila", "Dr. Sasikanth Reddy P", "Dr. G. Vaishnavi"],
+        doctors=["Dr. Kosuri Akhila", "Dr. Sasikanth Reddy P"],
         faqs=[("What is a normal HbA1c?",
                "An HbA1c below 5.7% is normal, 5.7–6.4% suggests pre-diabetes, and 6.5% or above indicates "
                "diabetes. Your target depends on your age and health — your doctor will set it with you."),
@@ -338,5 +338,5 @@ DOC_SPECIALTY = {
     "Dr. Vidyala Harika": ["PrimaryCare"], "Dr. M. Kiran Kumar": ["PrimaryCare"],
     "Dr. Juluri Vamshi Krishna": ["Emergency"], "Dr. Mohammed Adil Faraz": ["Surgical"],
     "Dr. Bagam Mahesh": ["Musculoskeletal"], "Dr. Ch. Divya": ["Pediatric"],
-    "Dr. G. Vaishnavi": ["Endocrine"], "Dr. Manisha M": ["Otolaryngologic"],
+    "Dr. G. Vaishnavi": ["Pediatric"], "Dr. Manisha M": ["Otolaryngologic"],
 }
