@@ -1388,7 +1388,12 @@ def build_doctor(i, d):
     sp_short = plain_spec.split(" · ")[0].split(" & ")[0].replace("Consultant ", "")
     img = f"{seo.SITE}/assets/img/doctors/{photo}.jpg" if photo else None
     physician = {
-        "@type": "Physician", "@id": url + "#physician", "name": name, "url": url,
+        "@type": ["Physician", "Person"], "@id": url + "#physician", "name": name, "url": url,
+        "jobTitle": plain_spec, "worksFor": {"@id": seo.HOSPITAL_ID},
+        "priceRange": "₹₹", "image": img or f"{seo.SITE}/assets/img/building.jpg",
+        "openingHoursSpecification": [{"@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+            "opens": "09:00", "closes": "21:00"}],
         "medicalSpecialty": DOC_SPECIALTY.get(name, []),
         "description": f"{name} — {plain_spec} ({qual.replace('&amp;', '&')}) at Mana Hospitals, Gajularamaram, Hyderabad.",
         "hasCredential": [{"@type": "EducationalOccupationalCredential", "credentialCategory": "degree", "name": q}
@@ -1400,8 +1405,6 @@ def build_doctor(i, d):
         "areaServed": [{"@type": "Place", "name": a + ", Hyderabad"} for a in seo.AREAS[:8]],
         "isAcceptingNewPatients": True,
     }
-    if img:
-        physician["image"] = img
     first_dept = [(depts[0]["nav"], depts[0]["slug"] + ".html")] if depts else []
     return shell(slug=doc_url(name),
                  title=fit_title(f"{name}, {sp_short} in Gajularamaram | Mana Hospitals",

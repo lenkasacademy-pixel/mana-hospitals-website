@@ -110,6 +110,8 @@ def webpage_node(slug, title, desc, kind="WebPage", about=None, image=None, spea
          "breadcrumb": {"@id": url + "#breadcrumb"}, "lastReviewed": "2026-11-18"}
     if about:
         n["about"] = about
+        if kind == "ProfilePage":
+            n["mainEntity"] = about
     if image:
         n["primaryImageOfPage"] = {"@type": "ImageObject", "url": image}
     if speakable:
