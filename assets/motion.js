@@ -11,6 +11,12 @@
   var $$ = function (s, c) { return Array.prototype.slice.call((c || document).querySelectorAll(s)); };
 
   document.documentElement.classList.add('js-motion');
+
+  /* mobile drawer: tap outside it to close (runs even with reduced motion) */
+  document.addEventListener('click', function (e) {
+    var mm = document.getElementById('mmenu'), b = document.getElementById('burger');
+    if (mm && b && mm.classList.contains('open') && !mm.contains(e.target) && !b.contains(e.target)) b.click();
+  });
   if (reduce) return;
 
   /* 1 ── headline words rise in one after another */

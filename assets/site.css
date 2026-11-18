@@ -652,3 +652,24 @@ a.mdoc:hover{box-shadow:var(--sh);border-color:transparent}
 .cine-step.s4{bottom:18vh}
 .cine{border-radius:0 0 32px 32px;overflow:clip}@media (max-width:720px){.cine{border-radius:0 0 24px 24px}}
 @media (max-width:720px){.cine-step,.cine-step.right,.cine-step.s4{bottom:15vh}}
+
+/* ═══════════════ mobile menu: button on the right, drawer from the right ═══════════════ */
+.nav-cta{margin-left:auto}
+.mmenu{left:auto;right:0;top:0;bottom:0;width:min(86vw,380px);justify-content:flex-start;gap:0;
+  padding:88px 24px 28px;background:#fff;opacity:1;visibility:hidden;transform:translateX(105%);
+  transition:transform .45s cubic-bezier(.2,.8,.2,1),visibility .45s,box-shadow .45s;
+  border-radius:28px 0 0 28px;box-shadow:0 0 0 100vmax rgba(5,7,13,0);overflow-y:auto}
+.mmenu.open{visibility:visible;transform:none;box-shadow:-20px 0 60px -20px rgba(0,0,0,.35),0 0 0 100vmax rgba(5,7,13,.45)}
+.mmenu::before{content:"Menu";position:absolute;top:34px;left:24px;font-size:13px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--mute)}
+.mmenu .mclose{top:22px;right:20px;width:42px;height:42px;font-size:22px;line-height:1}
+.mmenu a:not(.btn){display:flex;justify-content:space-between;align-items:center;font-size:22px;font-weight:600;letter-spacing:-.02em;
+  padding:16px 2px;border-bottom:1px solid var(--line);color:var(--ink)}
+.mmenu a:not(.btn)::after{content:"";width:9px;height:9px;border-top:2px solid currentColor;border-right:2px solid currentColor;transform:rotate(45deg);opacity:.35;margin-right:6px}
+.mmenu a:not(.btn)[aria-current="page"]{color:var(--green-d)}
+.mmenu a:not(.btn)[aria-current="page"]::after{opacity:1}
+.mmenu .btn{font-size:15px;height:52px;padding:0 22px;align-self:stretch;margin-top:12px;letter-spacing:0}
+.mmenu .btn:first-of-type{margin-top:28px}
+.mmenu a{opacity:0;transform:translateX(18px);transition:opacity .35s ease,transform .35s ease,color .2s}
+.mmenu.open a{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.mmenu{transition:none}.mmenu a{opacity:1;transform:none;transition:none}}
+.mmenu a:not(.btn) + .btn{margin-top:28px}

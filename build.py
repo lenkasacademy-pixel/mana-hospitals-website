@@ -20,6 +20,7 @@ EMERG_TEL  = "+919966994859"
 EMAIL      = "info@wecaremana.com"
 ADDRESS    = "Plot No. 219, beside SBI Bank,<br>Mahadevapuram Colony, Gajularamaram,<br>Hyderabad — 500055"
 WA         = "https://wa.me/917995895858"
+ASSET_V    = "20261118c"   # bump when site.css / *.js change so browsers fetch the new files
 # Google Business listing (from the client's share link) — pin at 17.5166458, 78.4144235
 MAPS_LISTING = "https://share.google/QCrYoUiRkgj39kQA7"
 MAPS_DIR     = "https://www.google.com/maps/dir/?api=1&amp;destination=17.5166458%2C78.4144235"
@@ -66,7 +67,7 @@ def shell(*, slug, title, desc, body, jsonld=""):
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/site.css">
+<link rel="stylesheet" href="assets/site.css?v={ASSET_V}">
 {jsonld}
 </head>
 <body>
@@ -136,8 +137,8 @@ def shell(*, slug, title, desc, body, jsonld=""):
   <a href="book-appointment.html" class="btn b-dark">Book</a>
 </div>
 
-<script src="assets/motion.js" defer></script>
-<script src="assets/app.js" defer></script>
+<script src="assets/motion.js?v={ASSET_V}" defer></script>
+<script src="assets/app.js?v={ASSET_V}" defer></script>
 </body>
 </html>
 """
