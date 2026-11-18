@@ -22,6 +22,7 @@
 <link rel="stylesheet" href="assets/site.css">
 </head>
 <body>
+<div class="progress" id="prog" aria-hidden="true"></div>
 
 <!-- ══════════ NAV ══════════ -->
 <nav class="nav" id="nav" aria-label="Main">
@@ -106,6 +107,10 @@
     </div>
   </div>
 
+  <div class="ecg" aria-hidden="true">
+    <svg viewBox="0 0 1600 70" preserveAspectRatio="none"><defs><linearGradient id="ecgGrad" x1="0" x2="1"><stop offset="0" stop-color="#2E9E4F" stop-opacity="0"/><stop offset=".3" stop-color="#2E9E4F"/><stop offset=".7" stop-color="#7A66E0"/><stop offset="1" stop-color="#7A66E0" stop-opacity="0"/></linearGradient></defs>
+    <path d="M0 40 H520 L545 40 L560 22 L575 40 L600 40 L615 6 L635 66 L652 40 L700 40 L715 30 L732 40 H1080 L1100 40 L1112 26 L1124 40 L1145 40 L1158 10 L1176 62 L1190 40 L1230 40 L1242 32 L1256 40 H1600"/></svg>
+  </div>
   <div class="notch" aria-hidden="true">
     <svg viewBox="0 0 560 46" preserveAspectRatio="none"><path d="M0 46 C40 46 46 0 90 0 H470 C514 0 520 46 560 46 Z" fill="currentColor"/></svg>
   </div>
@@ -421,6 +426,7 @@
   <a href="#book" class="btn b-dark">Book</a>
 </div>
 
+<script src="assets/motion.js" defer></script>
 <script src="assets/app.js" defer></script>
 </body>
 </html>

@@ -486,3 +486,100 @@ a.mdoc:hover{box-shadow:var(--sh);border-color:transparent}
 .mdocs.four{grid-template-columns:repeat(4,1fr)}
 @media (max-width:1080px){.dp-grid{grid-template-columns:1fr}.dp-photo{justify-self:start}.mdocs.four{grid-template-columns:1fr 1fr}}
 @media (max-width:720px){.dp-fc{left:auto;right:-6px;bottom:-14px;width:190px}.dp-photo{width:min(300px,86%)}.mdocs.four{grid-template-columns:1fr}}
+
+/* ═══════════════ motion ═══════════════ */
+/* smooth cross-page transitions (Chrome/Edge/Safari 18+; others just navigate) */
+@view-transition{navigation:auto}
+::view-transition-old(root){animation:vtOut .28s ease both}
+::view-transition-new(root){animation:vtIn .42s cubic-bezier(.2,.8,.2,1) both}
+@keyframes vtOut{to{opacity:0;transform:translateY(-8px)}}
+@keyframes vtIn{from{opacity:0;transform:translateY(14px)}}
+
+/* scroll progress line */
+.progress{position:fixed;top:0;left:0;right:0;height:3px;z-index:70;transform-origin:0 50%;transform:scaleX(0);
+  background:linear-gradient(90deg,var(--green),#7A66E0);pointer-events:none}
+
+/* nav tightens once you scroll */
+.nav .bar{transition:padding .3s,box-shadow .3s,background .3s}
+.nav.stuck .bar{box-shadow:0 14px 40px -16px rgba(13,40,25,.35)}
+
+/* richer reveal: rise + un-blur (blur only where it's cheap) */
+.rise,.pop,.wipe{transform:translateY(26px) scale(.985)}
+@media (hover:hover) and (pointer:fine){
+  .rise:not(.in),.pop:not(.in){filter:blur(6px)}
+  .rise,.pop{transition-property:opacity,transform,filter}
+}
+
+/* headline words */
+.words .w{display:inline-block;opacity:0;transform:translateY(.45em);filter:blur(8px);
+  animation:wIn .9s cubic-bezier(.2,.8,.2,1) var(--wd,0ms) forwards}
+@keyframes wIn{to{opacity:1;transform:none;filter:blur(0)}}
+
+/* animated gradient on the green headline words */
+.hero h1 em,.phero h1 i{background:linear-gradient(100deg,var(--green-d) 0%,#2E9E4F 30%,#5B48C9 55%,var(--green-d) 80%);
+  background-size:250% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:hue 9s ease-in-out infinite alternate}
+.hero h1 em .w,.phero h1 i .w{background:inherit;background-size:inherit;-webkit-background-clip:text;background-clip:text;color:transparent}
+@keyframes hue{to{background-position:100% 0}}
+
+/* floating cards pop in, then keep floating */
+.fc{animation:fcIn .9s cubic-bezier(.2,.8,.2,1) backwards,float 6s ease-in-out infinite}
+.fc-1{animation-delay:.5s,0s}.fc-2{animation-delay:.7s,-2s}.fc-3{animation-delay:.9s,-4s}.dp-fc{animation-delay:.6s,-1s}
+@keyframes fcIn{from{opacity:0;translate:0 24px;scale:.9}}
+.photo{animation:phIn 1.1s cubic-bezier(.2,.8,.2,1) .15s backwards}
+@keyframes phIn{from{opacity:0;clip-path:inset(12% 8% 12% 8% round 28px);scale:1.04}}
+.photo img{will-change:transform}
+
+/* heartbeat line drawn across the home hero */
+.ecg{position:absolute;left:0;right:0;bottom:30px;height:56px;z-index:-1;opacity:.5;pointer-events:none}
+.ecg svg{width:100%;height:100%}
+.ecg path{fill:none;stroke:url(#ecgGrad);stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:2400;stroke-dashoffset:2400;animation:ecg 5.5s cubic-bezier(.45,0,.2,1) 1s infinite}
+@keyframes ecg{0%{stroke-dashoffset:2400}55%{stroke-dashoffset:0}80%{stroke-dashoffset:0;opacity:1}100%{stroke-dashoffset:0;opacity:0}}
+
+/* facility strip ticker */
+.strip-row.ticking{display:block;overflow:hidden;max-width:none;padding:0;
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent);mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent)}
+.tick{display:flex;align-items:center;gap:46px;width:max-content;animation:tick 32s linear infinite}
+.tick-gap{width:0}
+.strip-row.ticking:hover .tick{animation-play-state:paused}
+@keyframes tick{to{transform:translateX(calc(-50% - 23px))}}
+
+/* buttons: shine sweep, ripple, press */
+.btn,.chip,.doc-b{position:relative;overflow:hidden;isolation:isolate}
+.btn.b-dark::after,.btn.b-green::after{content:"";position:absolute;inset:0;z-index:-1;
+  background:linear-gradient(110deg,transparent 30%,rgba(255,255,255,.28) 50%,transparent 70%);transform:translateX(-120%);transition:transform .7s ease}
+.btn.b-dark:hover::after,.btn.b-green:hover::after{transform:translateX(120%)}
+.hero-actions .b-dark::after{animation:shine 4.5s ease-in-out 2.2s infinite}
+@keyframes shine{0%,70%{transform:translateX(-120%)}90%,100%{transform:translateX(120%)}}
+.btn{transition:transform .2s,background .2s,box-shadow .2s,translate .25s cubic-bezier(.2,.8,.2,1)}
+.btn:active,.chip:active,.doc-b:active{transform:scale(.96)}
+.ripple{position:absolute;border-radius:50%;background:currentColor;opacity:.18;transform:scale(0);pointer-events:none;animation:rip .65s ease-out forwards}
+@keyframes rip{to{transform:scale(1);opacity:0}}
+
+/* cards: spotlight + tilt on desktop, press on touch */
+.spot{position:relative;overflow:hidden;transform-style:preserve-3d}
+.spot::before{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;opacity:0;transition:opacity .3s;
+  background:radial-gradient(320px circle at var(--mx,50%) var(--my,50%),rgba(46,158,79,.12),transparent 60%)}
+.sp.feat.spot::before{background:radial-gradient(320px circle at var(--mx,50%) var(--my,50%),rgba(255,255,255,.14),transparent 60%)}
+.spot:hover::before{opacity:1}
+.spot.in:hover{transform:perspective(900px) rotateX(var(--rx,0)) rotateY(var(--ry,0)) translateY(-4px);transition-delay:0s;transition-duration:.25s}
+@media (hover:none){.sp:active,.doc:active,.fcard:active,.rel a:active,.mdoc:active,.ci:active{transform:scale(.98);transition:transform .15s}}
+
+/* avatar ring on hover */
+.doc-av{transition:box-shadow .3s}
+.doc:hover .doc-av,.mdoc:hover .doc-av{box-shadow:0 0 0 3px #fff,0 0 0 5px var(--mint2)}
+
+/* section heading underline grows in */
+.eyebrow::before{transition:width .8s cubic-bezier(.2,.8,.2,1) .2s}
+.shead:not(.in) .eyebrow::before{width:0}
+
+/* sticky phone bar: subtle bounce on arrival */
+@media (max-width:720px){.sbar{transition:transform .5s cubic-bezier(.34,1.56,.64,1)}}
+
+@media (prefers-reduced-motion:reduce){
+  @view-transition{navigation:none}
+  .words .w{opacity:1;transform:none;filter:none;animation:none}
+  .fc,.photo,.ecg path,.tick,.hero h1 em,.phero h1 i,.hero-actions .b-dark::after{animation:none!important}
+  .ecg path{stroke-dashoffset:0}
+  .rise,.pop,.wipe{filter:none!important}
+}
+@media (max-width:720px){.ecg{bottom:44px;height:44px;opacity:.4}}

@@ -70,6 +70,7 @@ def shell(*, slug, title, desc, body, jsonld=""):
 {jsonld}
 </head>
 <body>
+<div class="progress" id="prog" aria-hidden="true"></div>
 
 <nav class="nav" id="nav" aria-label="Main">
   <div class="nav-wrap">
@@ -135,6 +136,7 @@ def shell(*, slug, title, desc, body, jsonld=""):
   <a href="book-appointment.html" class="btn b-dark">Book</a>
 </div>
 
+<script src="assets/motion.js" defer></script>
 <script src="assets/app.js" defer></script>
 </body>
 </html>
