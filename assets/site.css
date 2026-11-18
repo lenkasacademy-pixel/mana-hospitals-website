@@ -734,3 +734,22 @@ section.cine{padding:0}
   .dp-hero .hero-actions .btn{width:100%;white-space:normal;text-align:center;height:auto;min-height:52px;padding:12px 20px;line-height:1.3}
   .dp-photo{margin-top:8px}
 }
+
+/* ═══════════════ SEO / AEO blocks ═══════════════ */
+.sr-only{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.aeo-glance{background:#fff;border:1px solid var(--line);border-left:4px solid var(--green);border-radius:var(--r-md);padding:22px 24px;margin-bottom:8px}
+.aeo-glance .aeo-answer{font-size:16px;color:var(--ink);line-height:1.65;margin:0}
+.aeo-glance dl{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px 20px;margin:16px 0 0}
+.aeo-glance dl div{margin:0}
+.aeo-glance dt{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--mute)}
+.aeo-glance dd{margin:4px 0 0;font-size:14.5px;font-weight:600;color:var(--ink);line-height:1.45}
+.aeo-glance dd a{color:var(--green-d)}
+.aeo-glance .aeo-areas{font-size:14px;color:var(--ink2);margin:16px 0 0;line-height:1.6}
+.aeo-glance.home{padding:28px 30px}
+.chips-all a{padding:8px 14px;border-radius:999px;background:var(--mint);border:1px solid var(--mint2);font-size:13.5px;font-weight:600;color:var(--green-d);transition:background .2s}
+.chips-all a:hover{background:var(--mint2)}
+.fgrid{grid-template-columns:1.3fr .8fr 1.9fr 1.2fr}
+.fcols{display:grid!important;grid-template-columns:1fr 1fr;gap:8px 18px}
+.fspec h4{white-space:nowrap}
+@media (max-width:1080px){.fgrid{grid-template-columns:1fr 1fr}.fspec{grid-column:1/-1}}
+@media (max-width:720px){.fgrid{grid-template-columns:1fr}.fcols{grid-template-columns:1fr 1fr}.aeo-glance{padding:18px}.aeo-glance.home{padding:20px}}
