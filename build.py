@@ -20,7 +20,7 @@ EMERG_TEL  = "+919966994859"
 EMAIL      = "info@wecaremana.com"
 ADDRESS    = "Plot No. 219, beside SBI Bank,<br>Mahadevapuram Colony, Gajularamaram,<br>Hyderabad — 500055"
 WA         = "https://wa.me/917995895858"
-ASSET_V    = "20261118g"   # bump when site.css / *.js change so browsers fetch the new files
+ASSET_V    = "20261118h"   # bump when site.css / *.js change so browsers fetch the new files
 # Google Business listing (from the client's share link) — pin at 17.5166458, 78.4144235
 MAPS_LISTING = "https://share.google/QCrYoUiRkgj39kQA7"
 MAPS_DIR     = "https://www.google.com/maps/dir/?api=1&amp;destination=17.5166458%2C78.4144235"
