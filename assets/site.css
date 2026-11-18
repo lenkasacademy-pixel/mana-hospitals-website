@@ -673,3 +673,15 @@ a.mdoc:hover{box-shadow:var(--sh);border-color:transparent}
 .mmenu.open a{opacity:1;transform:none}
 @media (prefers-reduced-motion:reduce){.mmenu{transition:none}.mmenu a{opacity:1;transform:none;transition:none}}
 .mmenu a:not(.btn) + .btn{margin-top:28px}
+
+/* transparent logo (assets/logo.png) — no white box */
+.brand img{mix-blend-mode:normal;height:32px;width:auto;display:block}
+.nav .bar{padding-left:18px}
+.flogo{padding:12px 16px}
+.flogo img{height:30px}
+@media (max-width:720px){.brand img{height:27px}.nav .bar{padding-left:14px}}
+@media (max-width:360px){.brand img{height:23px}}
+@media (max-width:720px){.cine{height:240vh}}
+.brand img{height:36px}
+@media (max-width:720px){.brand img{height:32px}}
+@media (max-width:360px){.brand img{height:27px}}

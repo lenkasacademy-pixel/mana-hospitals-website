@@ -20,7 +20,7 @@ EMERG_TEL  = "+919966994859"
 EMAIL      = "info@wecaremana.com"
 ADDRESS    = "Plot No. 219, beside SBI Bank,<br>Mahadevapuram Colony, Gajularamaram,<br>Hyderabad — 500055"
 WA         = "https://wa.me/917995895858"
-ASSET_V    = "20261118c"   # bump when site.css / *.js change so browsers fetch the new files
+ASSET_V    = "20261118g"   # bump when site.css / *.js change so browsers fetch the new files
 # Google Business listing (from the client's share link) — pin at 17.5166458, 78.4144235
 MAPS_LISTING = "https://share.google/QCrYoUiRkgj39kQA7"
 MAPS_DIR     = "https://www.google.com/maps/dir/?api=1&amp;destination=17.5166458%2C78.4144235"
@@ -77,7 +77,7 @@ def shell(*, slug, title, desc, body, jsonld=""):
   <div class="nav-wrap">
     <div class="bar">
       <a href="index.html" class="brand" aria-label="Mana Hospitals — home">
-        <img src="assets/logo.jpg" alt="Mana Hospitals — a unit of Wecare Lifeline Healthcare Pvt. Ltd." width="984" height="200">
+        <img src="assets/logo.png" alt="Mana Hospitals — a unit of Wecare Lifeline Healthcare Pvt. Ltd." width="895" height="181">
       </a>
       <ul class="nlinks">
 {nav_links}
@@ -104,7 +104,7 @@ def shell(*, slug, title, desc, body, jsonld=""):
   <div class="wrap">
     <div class="fgrid">
       <div>
-        <span class="flogo"><img src="assets/logo.jpg" alt="Mana Hospitals — a unit of Wecare Lifeline Healthcare Pvt. Ltd."></span>
+        <span class="flogo"><img src="assets/logo.png" alt="Mana Hospitals — a unit of Wecare Lifeline Healthcare Pvt. Ltd."></span>
         <p>Multispeciality care for Gajularamaram and north-west Hyderabad — consultant-led, around the clock.</p>
       </div>
       <div><h4>Explore</h4><ul>
