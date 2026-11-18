@@ -79,12 +79,22 @@ def hospital_node(specialities, doctors_count):
              "areaServed": "IN", "availableLanguage": ["English", "Telugu", "Hindi"]}],
         "areaServed": [{"@type": "Place", "name": a + ", Hyderabad"} for a in AREAS],
         "medicalSpecialty": sorted({s["specialty"] for s in specialities}),
-        "department": [{"@type": "MedicalClinic", "name": f'{plain(s["title"])} — {NAME}',
-                        "url": f'{SITE}/{s["slug"]}.html', "medicalSpecialty": s["specialty"],
-                        "parentOrganization": {"@id": HOSPITAL_ID}} for s in specialities],
+        "department": [dept_node(s) for s in specialities],
         "priceRange": "₹₹",
         "currenciesAccepted": "INR",
     }
+
+
+def dept_node(s):
+    """A department as a complete local business (Google wants NAP + image + priceRange on each)."""
+    return {"@type": "MedicalClinic", "@id": f'{SITE}/{s["slug"]}.html#department',
+            "name": f'{plain(s["title"])} — {NAME} Gajularamaram', "url": f'{SITE}/{s["slug"]}.html',
+            "medicalSpecialty": s["specialty"], "parentOrganization": {"@id": HOSPITAL_ID},
+            "address": postal(), "geo": geo(), "telephone": PHONE_SCHEMA,
+            "image": SITE + "/assets/img/building.jpg", "priceRange": "₹₹",
+            "openingHoursSpecification": [{"@type": "OpeningHoursSpecification",
+                "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+                "opens": "00:00", "closes": "23:59"}]}
 
 
 def website_node():

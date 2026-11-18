@@ -819,10 +819,7 @@ def build_speciality(s):
 """
     about = {"@type": "MedicalSpecialty", "name": s.get("specialty", "")} if s.get("specialty") else None
     phys = [{"@id": f"{seo.SITE}/{doc_url(n)}#physician"} for n in docnames]
-    clinic = {"@type": "MedicalClinic", "@id": f'{seo.SITE}/{s["slug"]}.html#department',
-              "name": f'{plain_title(s)} — Mana Hospitals Gajularamaram', "url": f'{seo.SITE}/{s["slug"]}.html',
-              "medicalSpecialty": s.get("specialty"), "parentOrganization": {"@id": seo.HOSPITAL_ID},
-              "address": seo.postal(), "geo": seo.geo(), "telephone": seo.PHONE_SCHEMA,
+    clinic = {**seo.dept_node(s),
               "areaServed": [{"@type": "Place", "name": a + ", Hyderabad"} for a in seo.AREAS],
               "availableService": [{"@type": "MedicalProcedure", "name": seo.plain(x)} for x in s["procedures"]],
               **({"employee": phys} if phys else {})}
