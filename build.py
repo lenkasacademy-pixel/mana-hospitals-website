@@ -20,7 +20,7 @@ EMERG_TEL  = "+919966994859"
 EMAIL      = "info@wecaremana.com"
 ADDRESS    = "Plot No. 219, beside SBI Bank,<br>Mahadevapuram Colony, Gajularamaram,<br>Hyderabad — 500055"
 WA         = "https://wa.me/917995895858"
-ASSET_V    = "20261118j"   # bump when site.css / *.js change so browsers fetch the new files
+ASSET_V    = "20261118k"   # bump when site.css / *.js change so browsers fetch the new files
 # Google Business listing (from the client's share link) — pin at 17.5166458, 78.4144235
 MAPS_LISTING = "https://share.google/QCrYoUiRkgj39kQA7"
 MAPS_DIR     = "https://www.google.com/maps/dir/?api=1&amp;destination=17.5166458%2C78.4144235"
@@ -264,7 +264,7 @@ def initials(name):
 
 def avatar(name, photo, i=0):
     if photo:
-        return (f'<div class="doc-av"><img src="assets/img/doctors/{photo}-face.jpg" alt="{name}" '
+        return (f'<div class="doc-av"><img src="assets/img/doctors/{photo}-face.jpg?v={ASSET_V}" alt="{name}" '
                 f'loading="lazy" width="240" height="240"></div>')
     return f'<div class="doc-av" style="background:{AV_COLOURS[i % 6]}">{initials(name)}</div>'
 
@@ -1153,7 +1153,7 @@ def build_doctor(i, d):
     depts = [s for s in SPECIALITIES if name in s["doctors"]]
     quals = [q.strip() for q in qual.split(",") if q.strip()]
     if photo:
-        portrait = (f'<img src="assets/img/doctors/{photo}.jpg" alt="{name}, {spec.replace("&amp;", "&")} at Mana Hospitals" '
+        portrait = (f'<img src="assets/img/doctors/{photo}.jpg?v={ASSET_V}" alt="{name}, {spec.replace("&amp;", "&")} at Mana Hospitals" '
                     f'fetchpriority="high">')
     else:
         portrait = f'<div class="dp-initials" style="background:{AV_COLOURS[i % 6]}">{initials(name)}</div>'

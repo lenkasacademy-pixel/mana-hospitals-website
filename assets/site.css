@@ -725,3 +725,12 @@ a.mdoc:hover{box-shadow:var(--sh);border-color:transparent}
   .story .cine-step h2{font-size:clamp(32px,9.5vw,44px)}
 }
 section.cine{padding:0}
+
+/* ═══════════════ phone buttons: never let text spill out of a pill ═══════════════ */
+@media (max-width:720px){
+  .hero-actions .btn,.cta-actions .btn,.cine-step .hero-actions .btn{flex:1 1 auto;min-width:0}
+  .btn{max-width:100%}
+  .dp-hero .hero-actions{flex-direction:column;align-items:stretch;gap:10px}
+  .dp-hero .hero-actions .btn{width:100%;white-space:normal;text-align:center;height:auto;min-height:52px;padding:12px 20px;line-height:1.3}
+  .dp-photo{margin-top:8px}
+}
