@@ -1,11 +1,11 @@
 # Mana Hospitals, Gajularamaram, Hyderabad
 
 > Mana Hospitals (మన హాస్పిటల్స్), a unit of Wecare Lifeline Healthcare Pvt. Ltd., is a multispeciality hospital
-> in Gajularamaram, Hyderabad, Telangana 500055 with 18 specialist consultants, a 24×7 emergency department,
+> in Gajularamaram, Hyderabad, Telangana 500072 with 18 specialist consultants, a 24×7 emergency department,
 > ICU and NICU, in-house diagnostics, dialysis and pharmacy, and cashless insurance support.
 
 ## Key facts
-- Address: Plot No. 219, beside SBI Bank, Mahadevapuram Colony, Gajularamaram, Hyderabad, Telangana 500055, India
+- Address: Plot No. 219, beside SBI Bank, Mahadevapuram Colony, Gajularamaram, Hyderabad, Telangana 500072, India
 - Map: https://maps.google.com/?cid=3478330352746109876 (17.5166458, 78.4144235)
 - Hospital phone / appointments: +91 79958 95858 (WhatsApp available)
 - Emergency (24×7): +91 99669 94859
@@ -27,8 +27,8 @@
 - [General & Laparoscopic Surgery](https://wecaremana.com/general-surgery.html): Hernia, gallbladder stones, appendicitis, lumps and cysts — treated with keyhole (laparoscopic) surgery wherever possible, for smaller scars and a faster return home.
 - [Paediatrics & Child Care](https://wecaremana.com/paediatrics.html): Fevers, coughs, vaccinations, growth and nutrition — care for newborns, children and teenagers, with NICU support and 24×7 emergency in the same building.
 - [24×7 Emergency & Critical Care](https://wecaremana.com/emergency-critical-care.html): Accidents, chest pain, breathlessness, stroke, poisoning or high fever — our emergency department, ICU and NICU are staffed around the clock, every day of the year.
-- [ENT — Ear, Nose & Throat](https://wecaremana.com/ent.html): Ear pain, hearing problems, sinusitis, tonsils, snoring and voice problems — diagnosed and treated by an ENT surgeon, for adults and children.
-- [Radiology & Diagnostics](https://wecaremana.com/radiology-diagnostics.html): Ultrasound, X-ray, Doppler and laboratory tests in the same building as your doctor — reported by a radiologist, with most results the same day.
+- [ENT — Ear, Nose & Throat](https://wecaremana.com/ent.html): Ear pain, hearing problems, sinusitis, tonsils, snoring and voice problems — diagnosed and treated, including ENT surgery, by an ENT surgeon for adults and children.
+- [Radiology & Diagnostics](https://wecaremana.com/radiology-diagnostics.html): CT, MRI, ultrasound, X-ray, Doppler and laboratory tests in the same building as your doctor — reported by a radiologist, with most results the same day.
 - [Infertility & Fertility Care](https://wecaremana.com/infertility.html): Trying to conceive without success? Step-by-step evaluation and treatment for couples, led by a gynaecologist with a fellowship in reproductive medicine.
 - [Diabetes & Thyroid Care (Diabetology)](https://wecaremana.com/diabetes-care.html): Sugar control, insulin, thyroid and cholesterol — personalised plans from diabetologists, with same-day lab tests and regular follow-up.
 

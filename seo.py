@@ -15,7 +15,7 @@ LEGAL = "Wecare Lifeline Healthcare Pvt. Ltd."
 TELUGU = "మన హాస్పిటల్స్"
 STREET = "Plot No. 219, beside SBI Bank, Mahadevapuram Colony, Gajularamaram"
 LOCALITY = "Hyderabad"
-POSTCODE = "500055"           # client's address; Google listing shows 500072 — needs reconciling
+POSTCODE = "500072"           # as on the Google Maps listing (confirmed by client 18 Nov 2026)
 REGION = "Telangana"
 LAT, LNG = 17.5166458, 78.4144235
 PHONE_E164 = "+917995895858"
@@ -208,8 +208,8 @@ REDIRECTS = {
     "rama-krishna-reddy": "dr-ramakrishna-reddy-m.html",
     "sasikanth-reddy-p": "dr-sasikanth-reddy-p.html",
     "v-harika": "dr-vidyala-harika.html",
-    "rahul-gunde": "doctors.html",              # not on the current consultant list — confirm with client
-    "sujeeth-kumar-reddy-k": "doctors.html",    # not on the current consultant list — confirm with client
+    "rahul-gunde": "doctors.html",              # former consultant — old profile → doctors page (client, 18 Nov 2026)
+    "sujeeth-kumar-reddy-k": "doctors.html",    # former consultant — old profile → doctors page (client, 18 Nov 2026)
 }
 
 

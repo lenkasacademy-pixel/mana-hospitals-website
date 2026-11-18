@@ -24,13 +24,13 @@ Goal: rank #1–3 in Google's local results and AI answers for "<speciality> in/
 2. **Keep the preview out of Google** until then — the github.io copy duplicates the content. Don't share
    the preview link publicly; once the domain is live, the github.io URL redirects to it automatically.
 3. **Resolve NAP mismatches** (critical for local ranking):
-   - Postcode: site says **500055**, Google listing says **500072** → make them identical everywhere.
-   - Emergency/primary phone: listing shows **99669 94859**; site uses 79958 95858 for appointments and
-     99669 94859 for emergency. Use the same numbers on the listing, site, Practo, Justdial, etc.
-4. **Confirm claims marked `VERIFY`** in `specialities_extra.py` (ENT surgery scope, CT/MRI availability,
-   IUI/IVF in-house) — never publish a service the hospital doesn't offer.
-5. **Doctors on the old site but not here:** Dr. Rahul Gunde (DM Neurology), Dr. Sujeeth Kumar Reddy K
-   (MD Paediatrics), Dr. M. Anil Kumar — add them back or confirm they've left.
+   - Postcode: **500072** everywhere (matches the Google listing) — use the same on Practo, Justdial, etc.
+   - Phones: appointments **79958 95858**, emergency **99669 94859** (matches the listing) — use the same
+     numbers on Practo, Justdial, etc.
+4. **Services confirmed (18 Nov 2026):** ENT surgery ✔, CT & MRI ✔, IVF ✘ (not offered — the infertility page
+   says so and refers out). Never publish a service the hospital doesn't offer.
+5. **Former doctors:** Dr. Rahul Gunde and Dr. Sujeeth Kumar Reddy K have left — their old URLs redirect to
+   the doctors page.
 
 ## Google Business Profile (biggest local lever)
 

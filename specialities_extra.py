@@ -4,8 +4,8 @@ Same shape as SPECIALITIES in build.py, plus the SEO keys used everywhere:
   specialty — schema.org MedicalSpecialty value
   term      — what a patient searches for ("piles doctor", "paediatrician")
   seo_kw    — keyword-first page title stem
-Claims are kept to what the hospital and its consultants already state; anything marked
-VERIFY in the comments should be confirmed with the client before go-live.
+Claims are kept to what the hospital and its consultants already state. Confirmed by the client
+18 Nov 2026: ENT surgery yes, CT & MRI yes, IVF not offered in-house.
 """
 
 EXTRA_SPECIALITIES = [
@@ -165,10 +165,10 @@ EXTRA_SPECIALITIES = [
         title="ENT — Ear, Nose &amp; Throat",
         lines=["ENT —", "<i>ear, nose &amp; throat</i>"],
         specialty="Otolaryngologic", term="ENT doctor", seo_kw="ENT Doctor (Ear, Nose &amp; Throat)",
-        lede="Ear pain, hearing problems, sinusitis, tonsils, snoring and voice problems — diagnosed and treated "
-             "by an ENT surgeon, for adults and children.",
-        meta="ENT doctor in Gajularamaram, Hyderabad — ear infections, hearing, sinusitis, tonsils, nose and "
-             "throat problems treated by Dr. Manisha M at Mana Hospitals. Call +91 79958 95858.",
+        lede="Ear pain, hearing problems, sinusitis, tonsils, snoring and voice problems — diagnosed and treated, "
+             "including ENT surgery, by an ENT surgeon for adults and children.",
+        meta="ENT doctor in Gajularamaram, Hyderabad — ear, nose and throat problems, sinus, tonsil and ear "
+             "surgery by Dr. Manisha M at Mana Hospitals. Call +91 79958 95858.",
         overview="Ear, nose and throat problems affect sleep, hearing, speech and breathing — and in children "
                  "they can affect learning too. Our ENT surgeon examines, diagnoses and treats these conditions "
                  "with medicines or procedures as needed, for children and adults alike.",
@@ -177,7 +177,9 @@ EXTRA_SPECIALITIES = [
                     "Nose bleeds", "Vertigo and giddiness", "Hoarseness and voice problems"],
         procedures=["ENT examination and endoscopy", "Ear wax removal and ear toilet",
                     "Treatment plans for sinusitis and allergy",
-                    "Tonsil, adenoid and other ENT surgery when indicated",  # VERIFY scope with Dr. Manisha
+                    "Tonsil and adenoid surgery (tonsillectomy, adenoidectomy)",
+                    "Nose and sinus surgery — septoplasty, endoscopic sinus surgery, nasal polyps",
+                    "Ear surgery — ear drum repair and other ear procedures",
                     "Hearing assessment referral and follow-up"],
         when=["Ear pain or discharge, especially in a child",
               "Reduced hearing, ringing in the ears or giddiness",
@@ -200,17 +202,18 @@ EXTRA_SPECIALITIES = [
         slug="radiology-diagnostics", nav="Radiology &amp; Diagnostics",
         title="Radiology &amp; Diagnostics",
         lines=["Radiology", "<i>&amp; diagnostics</i>"],
-        specialty="Radiography", term="diagnostic centre", seo_kw="Radiology, Scans &amp; Lab Tests",
-        lede="Ultrasound, X-ray, Doppler and laboratory tests in the same building as your doctor — reported "
-             "by a radiologist, with most results the same day.",
-        meta="Scan centre and lab in Gajularamaram, Hyderabad — ultrasound, X-ray, Doppler and blood tests "
-             "reported by a radiologist at Mana Hospitals. Call +91 79958 95858.",
+        specialty="Radiography", term="diagnostic centre", seo_kw="CT, MRI &amp; Ultrasound Scans",
+        lede="CT, MRI, ultrasound, X-ray, Doppler and laboratory tests in the same building as your doctor — "
+             "reported by a radiologist, with most results the same day.",
+        meta="CT, MRI, ultrasound and X-ray scan centre with lab in Gajularamaram, Hyderabad — reported by a "
+             "radiologist at Mana Hospitals. Call +91 79958 95858.",
         overview="Accurate diagnosis drives good treatment. Our radiology and laboratory services sit under the "
                  "same roof as the consultants, so scans and tests are done and reported quickly — and you are "
                  "not sent across the city mid-treatment.",
-        conditions=["Abdominal and pelvic scans", "Pregnancy scans", "Joint, bone and chest X-rays",
+        conditions=["Brain, spine and body CT and MRI", "Abdominal and pelvic scans", "Pregnancy scans",
+                    "Joint, bone and chest X-rays",
                     "Blood vessel (Doppler) studies", "Thyroid and neck scans", "Routine and specialised blood tests"],
-        procedures=["Ultrasound (USG)", "Digital X-ray", "Colour Doppler",  # VERIFY CT/MRI availability before listing
+        procedures=["CT scan", "MRI scan", "Ultrasound (USG)", "Digital X-ray", "Colour Doppler",
                     "Antenatal ultrasound — dating, anomaly and growth scans", "Pathology and biochemistry lab",
                     "Health check-up packages"],
         when=["Your doctor has advised a scan or blood test",
@@ -223,8 +226,12 @@ EXTRA_SPECIALITIES = [
         faqs=[("Can I get a scan without a doctor's prescription?",
                "Most tests are done on a doctor's advice. If you have symptoms, see one of our consultants first "
                "and the scan can usually be done the same day."),
+              ("Is CT and MRI available at Mana Hospitals?",
+               "Yes. CT and MRI scans are done in-house in Gajularamaram and reported by our radiologist, so you "
+               "don't need to travel to another scan centre."),
               ("How soon will I get my report?",
-               "Most ultrasound, X-ray and blood test reports are ready the same day."),
+               "Most ultrasound, X-ray and blood test reports are ready the same day; CT and MRI reports usually "
+               "follow within the day."),
               ("Do I need to fast before an ultrasound?",
                "Fasting is needed for some abdominal scans, and a full bladder for pelvic scans. "
                "We will tell you how to prepare when you book.")]),
@@ -250,7 +257,7 @@ EXTRA_SPECIALITIES = [
                     "Ovulation induction and follicular monitoring",
                     "Laparoscopic and hysteroscopic fertility-enhancing surgery",  # FMAS
                     "PCOS and lifestyle programmes",
-                    "Counselling on assisted reproduction"],  # VERIFY whether IUI/IVF are offered in-house
+                    "Counselling and referral when IVF is needed"],  # IVF is NOT done in-house (client, 18 Nov 2026)
         when=["You have been trying for a year (or six months if you are over 35) without success",
               "Your periods are irregular or absent",
               "You have had two or more miscarriages",
@@ -265,6 +272,10 @@ EXTRA_SPECIALITIES = [
               ("Can PCOS affect fertility?",
                "Yes, PCOS can stop regular ovulation. It is one of the most treatable causes — with lifestyle "
                "changes and ovulation-inducing medicines many women conceive."),
+              ("Do you do IVF at Mana Hospitals?",
+               "IVF is not done at Mana Hospitals. We evaluate and treat most causes of infertility here; if IVF is "
+               "the right next step, our specialist explains why, refers you to a trusted IVF centre, and can continue "
+               "your pregnancy care with us afterwards."),
               ("Should both partners be tested?",
                "Yes. Male factors contribute to a large share of infertility, so evaluating both partners from "
                "the start saves time.")]),

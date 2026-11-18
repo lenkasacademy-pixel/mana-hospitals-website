@@ -20,7 +20,7 @@ PHONE_TEL  = "+917995895858"
 EMERGENCY  = "+91 99 669 948 59"
 EMERG_TEL  = "+919966994859"
 EMAIL      = "info@wecaremana.com"
-ADDRESS    = "Plot No. 219, beside SBI Bank,<br>Mahadevapuram Colony, Gajularamaram,<br>Hyderabad — 500055"
+ADDRESS    = "Plot No. 219, beside SBI Bank,<br>Mahadevapuram Colony, Gajularamaram,<br>Hyderabad — 500072"
 WA         = "https://wa.me/917995895858"
 ASSET_V    = "20261118l"   # bump when site.css / *.js change so browsers fetch the new files
 # Google Business listing (from the client's share link) — pin at 17.5166458, 78.4144235
@@ -254,7 +254,7 @@ N_WORD = {17: "Seventeen", 18: "Eighteen", 19: "Nineteen", 20: "Twenty"}.get(N_D
 HOME_FAQS = [
     ("Where is Mana Hospitals located?",
      "Mana Hospitals is at Plot No. 219, beside SBI Bank, Mahadevapuram Colony, Gajularamaram, Hyderabad, "
-     "Telangana 500055 — with parking on site and step-free access."),
+     "Telangana 500072 — with parking on site and step-free access."),
     ("Is emergency and ICU care available 24×7?",
      "Yes. Our emergency department, ICU and NICU are staffed round the clock, every day of the year, with an "
      "intensivist and on-call consultants across specialities. Call +91 99669 94859 and we will be ready before you arrive."),
@@ -276,7 +276,7 @@ HOME_FAQS = [
      "prescriptions, and the relevant consultant will review them with you. There is no obligation to continue "
      "treatment with us."),
     ("Are diagnostics and pharmacy on site?",
-     "Yes. Pathology, ultrasound, X-ray and imaging are in-house, with same-day results for most tests, and our "
+     "Yes. Pathology, CT, MRI, ultrasound and X-ray are in-house, with same-day results for most tests, and our "
      "pharmacy is open 24×7. You will not be sent elsewhere mid-treatment."),
     ("Which areas does Mana Hospitals serve?",
      "Patients come to us from " + ", ".join(seo.AREAS[:-1]) + " and " + seo.AREAS[-1] + " in north-west Hyderabad."),
@@ -731,7 +731,7 @@ def build_speciality(s):
     who = (", ".join(docnames[:-1]) + (" and " if len(docnames) > 1 else "") + docnames[-1]) if docnames else ""
     local_faqs = [
         (f"Where can I find a {term} near Gajularamaram?",
-         f"Mana Hospitals, Plot No. 219, beside SBI Bank, Mahadevapuram Colony, Gajularamaram, Hyderabad 500055"
+         f"Mana Hospitals, Plot No. 219, beside SBI Bank, Mahadevapuram Colony, Gajularamaram, Hyderabad 500072"
          + (f" — consultations with {who}" if who else "")
          + ". OPD runs seven days a week and emergency care is open 24×7. Call +91 79958 95858 to book."),
         (f"Which areas does Mana Hospitals serve for {plain_title(s)}?",
@@ -745,7 +745,7 @@ def build_speciality(s):
     glance = f"""
       <div class="aeo-glance">
         <p class="aeo-answer"><b>{plain_title(s)} in Gajularamaram:</b> Mana Hospitals has a dedicated {plain_title(s)} department at
-        Plot No. 219, beside SBI Bank, Mahadevapuram Colony, Gajularamaram, Hyderabad 500055{(" with " + who) if who else ""}.
+        Plot No. 219, beside SBI Bank, Mahadevapuram Colony, Gajularamaram, Hyderabad 500072{(" with " + who) if who else ""}.
         OPD is open seven days a week, emergency and ICU 24×7, and cashless insurance is supported.</p>
         <dl>
           <div><dt>Where</dt><dd>Beside SBI Bank, Mahadevapuram Colony, Gajularamaram</dd></div>
@@ -1077,7 +1077,7 @@ def build_contact():
     jsonld = """<script type="application/ld+json">
 {"@context":"https://schema.org","@type":"Hospital","name":"Mana Hospitals",
 "url":"https://wecaremana.com/","telephone":"+91-79-958-958-58","email":"info@wecaremana.com",
-"address":{"@type":"PostalAddress","streetAddress":"Plot No. 219, beside SBI Bank, Mahadevapuram Colony, Gajularamaram","addressLocality":"Hyderabad","postalCode":"500055","addressRegion":"Telangana","addressCountry":"IN"},
+"address":{"@type":"PostalAddress","streetAddress":"Plot No. 219, beside SBI Bank, Mahadevapuram Colony, Gajularamaram","addressLocality":"Hyderabad","postalCode":"500072","addressRegion":"Telangana","addressCountry":"IN"},
 "openingHoursSpecification":[
 {"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday"],"opens":"09:00","closes":"21:00"},
 {"@type":"OpeningHoursSpecification","dayOfWeek":"Saturday","opens":"09:00","closes":"18:00"},
@@ -1162,7 +1162,7 @@ def build_contact():
            "be ready before you arrive.")}
 """
     return shell(slug="contact.html",
-                 title="Contact & Directions — Mana Hospitals Gajularamaram 500055",
+                 title="Contact & Directions — Mana Hospitals Gajularamaram 500072",
                  desc="Contact Mana Hospitals, Gajularamaram — Plot No. 219, beside SBI Bank, "
                       "Mahadevapuram Colony. Reception +91 79 958 958 58, emergency 24×7.",
                  body=body, kind="ContactPage", crumbs=[("Contact", None)])
@@ -1491,11 +1491,11 @@ Sitemap: {seo.SITE}/sitemap.xml
     (OUT / "llms.txt").write_text(f"""# Mana Hospitals, Gajularamaram, Hyderabad
 
 > Mana Hospitals (మన హాస్పిటల్స్), a unit of Wecare Lifeline Healthcare Pvt. Ltd., is a multispeciality hospital
-> in Gajularamaram, Hyderabad, Telangana 500055 with {N_DOCS} specialist consultants, a 24×7 emergency department,
+> in Gajularamaram, Hyderabad, Telangana 500072 with {N_DOCS} specialist consultants, a 24×7 emergency department,
 > ICU and NICU, in-house diagnostics, dialysis and pharmacy, and cashless insurance support.
 
 ## Key facts
-- Address: Plot No. 219, beside SBI Bank, Mahadevapuram Colony, Gajularamaram, Hyderabad, Telangana 500055, India
+- Address: Plot No. 219, beside SBI Bank, Mahadevapuram Colony, Gajularamaram, Hyderabad, Telangana 500072, India
 - Map: {seo.MAPS_CID} (17.5166458, 78.4144235)
 - Hospital phone / appointments: +91 79958 95858 (WhatsApp available)
 - Emergency (24×7): +91 99669 94859
