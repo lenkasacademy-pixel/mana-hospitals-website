@@ -703,3 +703,25 @@ a.mdoc:hover{box-shadow:var(--sh);border-color:transparent}
   /* no blur in the panel transitions */
   .cine-step{filter:none!important;transition:opacity .45s ease,transform .45s ease}
 }
+
+/* ═══════════════ phone header: story mode (assets/story.js) ═══════════════ */
+@media (max-width:720px){
+  .cine.story{height:100svh;height:100dvh;min-height:560px}
+  .story .cine-stick{position:relative;height:100%}
+  .story canvas,.story .cine-bar,.story .cine-hint{display:none}
+  .story-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 25%;background:#05070D}
+  .story .cine-dim{opacity:.18!important}
+  .story-bars{position:absolute;top:88px;left:16px;right:16px;z-index:4;display:flex;gap:5px}
+  .story-bars span{flex:1;height:3px;border-radius:3px;background:rgba(255,255,255,.32);overflow:hidden}
+  .story-bars i{display:block;height:100%;background:#fff;border-radius:3px;transform-origin:left center;transform:scaleX(0);will-change:transform}
+  .story-tap{position:absolute;inset:0;z-index:1;-webkit-tap-highlight-color:transparent}
+  .story .cine-step{z-index:2;pointer-events:none!important;bottom:11vh}
+  .story .cine-step.on a,.story .cine-step.on .btn{pointer-events:auto}
+  .story .cine-step{transform:translateY(18px);transition:opacity .5s ease,transform .6s cubic-bezier(.2,.8,.2,1)}
+  .story .cine-step.on{transform:none}
+  .story .cine-step.s4{transform:translateY(18px)}
+  .story .cine-step.s4.on{transform:none}
+  .story .cine-step h1{font-size:clamp(40px,11.5vw,54px)}
+  .story .cine-step h2{font-size:clamp(32px,9.5vw,44px)}
+}
+section.cine{padding:0}

@@ -22,6 +22,7 @@
   var hint = sec.querySelector('.cine-hint');
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var mobile = window.matchMedia('(max-width: 720px)').matches;
+  if (mobile) return;               // phones get the story-style header (assets/story.js)
 
   var COUNT = +sec.dataset.frames || 96;
   /* phones: stop before the camera gets so close the rooftop sign leaves the upright crop */
