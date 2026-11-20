@@ -22,7 +22,7 @@ EMERG_TEL  = "+919966994859"
 EMAIL      = "info@wecaremana.com"
 ADDRESS    = "Plot No. 219, beside SBI Bank,<br>Mahadevapuram Colony, Gajularamaram,<br>Hyderabad — 500072"
 WA         = "https://wa.me/917995895858"
-ASSET_V    = "20261120e"   # bump when site.css / *.js change so browsers fetch the new files
+ASSET_V    = "20261120g"   # bump when site.css / *.js change so browsers fetch the new files
 # Google Business listing (from the client's share link) — pin at 17.5166458, 78.4144235
 MAPS_LISTING = "https://share.google/QCrYoUiRkgj39kQA7"
 MAPS_DIR     = "https://www.google.com/maps/dir/?api=1&amp;destination=17.5166458%2C78.4144235"
@@ -727,6 +727,12 @@ def plain_title(s):
     return seo.plain(s["title"]).split(" (")[0]
 
 
+def i3d(name, cls="i3d"):
+    """Soft 3D icon (assets/img/icons3d/<name>.webp, transparent, 200x200)."""
+    return (f'<img class="{cls}" src="assets/img/icons3d/{name}.webp?v={ASSET_V}" alt="" width="200" height="200" '
+            f'loading="lazy" decoding="async">')
+
+
 def dimg(slug, alt="", lazy=True, cls=""):
     """Department 3D illustration (assets/img/dept/<slug>.webp, 800x600)."""
     return (f'<img src="assets/img/dept/{slug}.webp?v={ASSET_V}" alt="{alt}" width="800" height="600"'
@@ -976,11 +982,11 @@ def build_doctors():
   <div class="wrap">
     {shead("How consultations work", "What to <i>expect.</i>")}
     <div class="fgrid3">
-      <div class="fcard rise"><div class="n">01</div><h3>Book or walk in</h3>
+      <div class="fcard rise"><div class="fc-top">{i3d("hospital")}<div class="n">01</div></div><h3>Book or walk in</h3>
         <p>Call, WhatsApp or request a callback. OPD runs seven days a week; emergency never closes.</p></div>
-      <div class="fcard rise" style="--d:70ms"><div class="n">02</div><h3>Bring your records</h3>
+      <div class="fcard rise" style="--d:70ms"><div class="fc-top">{i3d("records")}<div class="n">02</div></div><h3>Bring your records</h3>
         <p>Previous prescriptions, reports and scans help your consultant decide faster and avoid repeat tests.</p></div>
-      <div class="fcard rise" style="--d:140ms"><div class="n">03</div><h3>Tests on site</h3>
+      <div class="fcard rise" style="--d:140ms"><div class="fc-top">{i3d("diagnostics")}<div class="n">03</div></div><h3>Tests on site</h3>
         <p>Lab, imaging and pharmacy are in the same building, so most results come back the same day.</p></div>
     </div>
   </div>
@@ -1027,14 +1033,14 @@ def build_about():
       multispeciality treatment, delivered in the neighbourhood, at the standard you would expect from a
       large city hospital.</p>
       <div class="facs">
-        <div class="fac rise"><i>01</i>24×7 emergency &amp; trauma care</div>
-        <div class="fac rise" style="--d:60ms"><i>02</i>Modern operating theatres &amp; ICU</div>
-        <div class="fac rise" style="--d:120ms"><i>03</i>Dialysis unit &amp; physiotherapy</div>
-        <div class="fac rise" style="--d:180ms"><i>04</i>On-site pharmacy, laboratory &amp; imaging</div>
+        <div class="fac rise"><i class="fi3">{i3d("ambulance")}</i>24×7 emergency &amp; trauma care</div>
+        <div class="fac rise" style="--d:60ms"><i class="fi3">{i3d("theatre")}</i>Modern operating theatres &amp; ICU</div>
+        <div class="fac rise" style="--d:120ms"><i class="fi3">{i3d("dialysis")}</i>Dialysis unit &amp; physiotherapy</div>
+        <div class="fac rise" style="--d:180ms"><i class="fi3">{i3d("pharmacy")}</i>On-site pharmacy, laboratory &amp; imaging</div>
       </div>
       <div class="mv rise">
-        <div><h4>Our mission</h4><p>To provide safe, ethical and affordable healthcare that is patient-first, protocol-driven and outcomes-focused.</p></div>
-        <div><h4>Our vision</h4><p>To be the most trusted neighbourhood hospital in Gajularamaram and the areas around it.</p></div>
+        <div>{i3d("mission", "mv-i")}<h4>Our mission</h4><p>To provide safe, ethical and affordable healthcare that is patient-first, protocol-driven and outcomes-focused.</p></div>
+        <div>{i3d("vision", "mv-i")}<h4>Our vision</h4><p>To be the most trusted neighbourhood hospital in Gajularamaram and the areas around it.</p></div>
       </div>
     </div>
   </div>
@@ -1044,13 +1050,13 @@ def build_about():
   <div class="wrap">
     {shead("Why choose us", "Three things <i>we insist on.</i>")}
     <div class="fgrid3">
-      <div class="fcard rise"><div class="n">01 — Scope</div><h3>Fourteen-plus specialities</h3>
+      <div class="fcard rise"><div class="fc-top">{i3d("hospital")}<div class="n">01 — Scope</div></div><h3>Fourteen-plus specialities</h3>
         <p>General medicine, orthopaedics, gastroenterology, cardiology, neurology, nephrology, obstetrics,
         paediatrics, pulmonology, dermatology, ENT, urology, radiology and ICU.</p></div>
-      <div class="fcard rise" style="--d:70ms"><div class="n">02 — Speed</div><h3>Everything on site</h3>
+      <div class="fcard rise" style="--d:70ms"><div class="fc-top">{i3d("clock")}<div class="n">02 — Speed</div></div><h3>Everything on site</h3>
         <p>On-site lab, pharmacy, X-ray and imaging, and ICU streamline diagnosis and treatment with
         minimal delays — and no being sent elsewhere mid-treatment.</p></div>
-      <div class="fcard rise" style="--d:140ms"><div class="n">03 — Clarity</div><h3>Written plans</h3>
+      <div class="fcard rise" style="--d:140ms"><div class="fc-top">{i3d("plan")}<div class="n">03 — Clarity</div></div><h3>Written plans</h3>
         <p>Written plans for diagnosis, options, costs and follow-up. You should always know what is
         happening, why, and what it will cost.</p></div>
     </div>
@@ -1138,10 +1144,10 @@ def build_contact():
 <section>
   <div class="wrap contact-grid">
     <div class="ccard rise">
-      <div class="crow"><span class="ic">{IC_PIN}</span><div><small>Address</small><b>{ADDRESS}</b></div></div>
-      <div class="crow"><span class="ic">{IC_PHONE}</span><div><small>Reception</small><a class="v" href="tel:{PHONE_TEL}">{PHONE}</a></div></div>
-      <div class="crow"><span class="ic" style="background:#FDECEC;color:var(--red)">{IC_PULSE}</span><div><small>Emergency · 24×7</small><a class="v red" href="tel:{EMERG_TEL}">{EMERGENCY}</a></div></div>
-      <div class="crow"><span class="ic">{IC_MAIL}</span><div><small>Email</small><a class="v" href="mailto:{EMAIL}">{EMAIL}</a></div></div>
+      <div class="crow"><span class="ic i3w">{i3d("location")}</span><div><small>Address</small><b>{ADDRESS}</b></div></div>
+      <div class="crow"><span class="ic i3w">{i3d("phone")}</span><div><small>Reception</small><a class="v" href="tel:{PHONE_TEL}">{PHONE}</a></div></div>
+      <div class="crow"><span class="ic i3w">{i3d("ambulance")}</span><div><small>Emergency · 24×7</small><a class="v red" href="tel:{EMERG_TEL}">{EMERGENCY}</a></div></div>
+      <div class="crow"><span class="ic i3w">{i3d("mail")}</span><div><small>Email</small><a class="v" href="mailto:{EMAIL}">{EMAIL}</a></div></div>
       <div class="cbtns">
         <a href="{MAPS_DIR}" target="_blank" rel="noopener" class="btn b-dark">Get directions {ARROW}</a>
         <a href="{MAPS_LISTING}" target="_blank" rel="noopener" class="btn b-light">View on Google Maps</a>
@@ -1283,12 +1289,12 @@ def build_book():
   <div class="wrap">
     {shead("Before you come", "What <i>to bring.</i>")}
     <div class="fgrid3">
-      <div class="fcard rise"><div class="n">01</div><h3>Your records</h3>
+      <div class="fcard rise"><div class="fc-top">{i3d("records")}<div class="n">01</div></div><h3>Your records</h3>
         <p>Previous prescriptions, reports and scans. They help your consultant decide faster and avoid
         repeating tests you have already had.</p></div>
-      <div class="fcard rise" style="--d:70ms"><div class="n">02</div><h3>Your medicines</h3>
+      <div class="fcard rise" style="--d:70ms"><div class="fc-top">{i3d("pharmacy")}<div class="n">02</div></div><h3>Your medicines</h3>
         <p>A list of what you currently take, including doses — or simply bring the strips with you.</p></div>
-      <div class="fcard rise" style="--d:140ms"><div class="n">03</div><h3>Insurance card</h3>
+      <div class="fcard rise" style="--d:140ms"><div class="fc-top">{i3d("policy-card")}<div class="n">03</div></div><h3>Insurance card</h3>
         <p>If you are claiming cashless, bring your policy card and a photo ID so our desk can start
         pre-authorisation.</p></div>
     </div>

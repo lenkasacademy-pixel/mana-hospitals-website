@@ -799,3 +799,24 @@ section.cine{padding:0}
 @media (max-width:720px){.ins-row li{width:120px;height:56px}.ins-row img{max-width:92px;max-height:34px}.ins-track{animation-duration:35s}}
 @media (prefers-reduced-motion:reduce){.ins-track{animation:none;flex-wrap:wrap;width:auto;justify-content:center}.ins-row[aria-hidden]{display:none}.ins-row{flex-wrap:wrap;justify-content:center}}
 .ins-row img[src*="tata-aig"],.ins-row img[src*="digit"]{max-height:52px}
+
+/* soft 3D icons (Nov 2026) */
+.i3d{display:block;width:56px;height:56px;object-fit:contain;filter:drop-shadow(0 6px 10px rgba(40,60,50,.08))}
+.strip-i .i3d{width:40px;height:40px;filter:none}
+.ci3{position:relative;flex:none;width:52px;height:52px;display:block;font-style:normal}
+.ci3 .i3d{width:52px;height:52px}
+.ci3 span{position:absolute;right:-4px;top:-4px;width:20px;height:20px;border-radius:50%;background:var(--ink);color:#fff;font-size:11px;font-weight:700;display:grid;place-items:center;box-shadow:0 0 0 2px #fff}
+.cstep{align-items:center}
+.mv-i{width:48px;height:48px;margin-bottom:10px;object-fit:contain}
+.ic.i3w{background:none!important;width:64px!important;height:64px!important;border-radius:0}
+.ic.i3w .i3d{width:64px;height:64px}
+.crow .ic.i3w{width:52px!important;height:52px!important}
+.crow .ic.i3w .i3d{width:52px;height:52px}
+.fc-top{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+.fc-top .i3d{width:72px;height:72px;margin:-6px 0 0 -6px}
+.fc-top .n{margin-top:6px}
+@media (max-width:720px){.fc-top .i3d{width:60px;height:60px}.strip-i .i3d{width:34px;height:34px}}
+.cstep i.ci3{width:52px;height:52px;background:none;border-radius:0;display:block}
+.fac{align-items:center}
+.fac i.fi3{width:44px;height:44px;background:none;border-radius:0;display:block}
+.fac i.fi3 .i3d{width:44px;height:44px;filter:none}
