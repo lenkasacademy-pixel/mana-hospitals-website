@@ -22,7 +22,8 @@ EMERG_TEL  = "+919966994859"
 EMAIL      = "info@wecaremana.com"
 ADDRESS    = "Plot No. 219, beside SBI Bank,<br>Mahadevapuram Colony, Gajularamaram,<br>Hyderabad — 500072"
 WA         = "https://wa.me/917995895858"
-ASSET_V    = "20261120i"   # bump when site.css / *.js change so browsers fetch the new files
+CHAT_LEAD_ENDPOINT = ""     # Google Apps Script web-app URL (tools/lead-collector.gs); "" = WhatsApp hand-off only
+ASSET_V    = "20261120m"   # bump when site.css / *.js change so browsers fetch the new files
 # Google Business listing (from the client's share link) — pin at 17.5166458, 78.4144235
 MAPS_LISTING = "https://share.google/QCrYoUiRkgj39kQA7"
 MAPS_DIR     = "https://www.google.com/maps/dir/?api=1&amp;destination=17.5166458%2C78.4144235"
@@ -74,6 +75,7 @@ def shell(*, slug, title, desc, body, jsonld="", crumbs=None, og_image=None, kin
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/site.css?v={ASSET_V}">
+<link rel="stylesheet" href="assets/chat.css?v={ASSET_V}">
 {schema}
 {jsonld}
 </head>
@@ -141,6 +143,8 @@ def shell(*, slug, title, desc, body, jsonld="", crumbs=None, og_image=None, kin
 
 <script src="assets/motion.js?v={ASSET_V}" defer></script>
 <script src="assets/app.js?v={ASSET_V}" defer></script>
+<script src="assets/chat-kb.js?v={ASSET_V}" defer></script>
+<script src="assets/chat.js?v={ASSET_V}" defer></script>
 </body>
 </html>
 """
@@ -1643,6 +1647,123 @@ Sitemap: {seo.SITE}/sitemap.xml
 
 
 # ══════════════════════════════════════════════════════════════
+# MANA CHAT — knowledge base for assets/chat.js (generated from the data above)
+# ══════════════════════════════════════════════════════════════
+# Everyday words patients type → department. Kept short and literal; the conditions lists add the rest.
+CHAT_SYNONYMS = {
+    "general-medicine": ["fever", "cold", "cough and cold", "viral", "typhoid", "dengue", "malaria", "bp", "blood pressure",
+                         "weakness", "tired", "fatigue", "body pain", "vomiting", "loose motions", "health check",
+                         "full body checkup", "physician", "general physician", "jwaram"],
+    "diabetes-care": ["sugar", "diabetes", "diabetic", "insulin", "thyroid", "hba1c", "glucose", "weight gain"],
+    "orthopaedics": ["knee", "knee pain", "joint pain", "back pain", "shoulder", "hip", "fracture", "bone", "ligament",
+                     "sports injury", "arthritis", "ortho", "knee replacement", "neck pain", "spine", "sprain", "noppi"],
+    "piles-fissure-fistula": ["piles", "fissure", "fistula", "haemorrhoids", "hemorrhoids", "bleeding in stool",
+                              "pain in motion", "anal", "pilonidal", "laser piles"],
+    "general-surgery": ["hernia", "gallbladder", "gall stone", "gallstones", "appendix", "appendicitis", "lump", "cyst",
+                        "laparoscopic", "surgery", "operation", "lipoma", "abscess"],
+    "gastroenterology": ["stomach", "stomach pain", "acidity", "gas", "ulcer", "liver", "jaundice", "endoscopy",
+                         "colonoscopy", "constipation", "indigestion", "fatty liver", "gastro"],
+    "nephrology": ["kidney", "kidneys", "dialysis", "creatinine", "kidney failure", "swelling legs"],
+    "urology": ["urine", "urinary", "kidney stone", "stones", "prostate", "burning urine", "bladder"],
+    "neurology": ["headache", "migraine", "fits", "epilepsy", "numbness", "tingling", "nerve", "brain", "dizziness",
+                  "vertigo", "neuro", "memory"],
+    "pulmonology": ["cough", "asthma", "breathing", "wheezing", "lungs", "tb", "tuberculosis", "copd", "chest infection",
+                    "pneumonia", "snoring", "sleep apnea", "dagu"],
+    "gynaecology": ["pregnancy", "pregnant", "periods", "irregular periods", "pcod", "pcos", "delivery", "c section",
+                    "white discharge", "uterus", "gynaec", "gynecologist", "lady doctor", "antenatal", "scan pregnancy",
+                    "pregnancy checkup", "pregnancy check up", "obg", "obgyn", "menstrual"],
+    "infertility": ["infertility", "conceive", "not getting pregnant", "ivf", "iui", "fertility", "egg", "sperm", "baby planning"],
+    "paediatrics": ["child", "children", "baby", "kid", "kids", "infant", "newborn", "vaccination", "vaccine",
+                    "paediatrician", "pediatrician", "son", "daughter"],
+    "ent": ["ear", "ear pain", "nose", "throat", "tonsil", "tonsils", "sinus", "hearing", "voice", "ent"],
+    "radiology-diagnostics": ["scan", "ct", "ct scan", "mri", "x ray", "xray", "ultrasound", "usg", "blood test", "lab", "report"],
+    "emergency-critical-care": ["emergency", "icu", "critical", "casualty", "trauma"],
+}
+
+
+def write_chat_kb():
+    import re as _re
+    def strip(t):
+        return _re.sub(r"<[^>]+>", "", t).replace("&amp;", "&").strip()
+    def words(t):
+        t = strip(t).lower()
+        t = _re.sub(r"[^a-z0-9 ]+", " ", t)
+        return " ".join(t.split())
+    stop = {"and", "the", "of", "for", "care", "with", "in", "to", "a", "treatment", "management", "surgery", "disease",
+            "diseases", "disorders", "problems", "conditions", "pain", "mana", "hospital", "hospitals", "gajularamaram",
+            "available", "doctor", "doctors", "your", "you", "what", "does", "there", "have", "can", "should", "how",
+            "when", "where", "need", "much", "long", "take"}
+    SHORT = {"general-surgery": "General Surgery", "piles-fissure-fistula": "Piles & Fistula",
+             "emergency-critical-care": "Emergency & ICU", "radiology-diagnostics": "Scans & Diagnostics",
+             "diabetes-care": "Diabetes & Thyroid", "gynaecology": "Gynaecology", "paediatrics": "Paediatrics",
+             "infertility": "Fertility Care", "ent": "ENT", "neurology": "Neurology", "orthopaedics": "Orthopaedics",
+             "nephrology": "Nephrology", "gastroenterology": "Gastroenterology", "general-medicine": "General Medicine"}
+    def short(nav, slug=""):
+        if slug in SHORT:
+            return SHORT[slug]
+        n = strip(nav)
+        return _re.split(r" & | \(|,", n)[0].strip() if len(n) > 18 else n
+
+    doc_depts = {}
+    for sp in SPECIALITIES:
+        for n in sp["doctors"]:
+            doc_depts.setdefault(n, []).append(sp["slug"])
+
+    depts = []
+    for sp in SPECIALITIES:
+        kw = set(CHAT_SYNONYMS.get(sp["slug"], []))
+        kw.add(words(sp["nav"]))
+        for w in words(sp["nav"]).split():
+            if w not in stop and len(w) > 3:
+                kw.add(w)
+        for c in sp["conditions"]:
+            cw = words(c)
+            kw.add(cw)
+            for part in _re.split(r" or | and |/", strip(c).lower()):
+                part = words(part)
+                if part and part not in stop and len(part) > 3:
+                    kw.add(part)
+        depts.append({"slug": sp["slug"], "name": strip(sp["nav"]), "short": short(sp["nav"], sp["slug"]),
+                      "lede": strip(sp["lede"]), "url": f'{sp["slug"]}.html',
+                      "img": f'assets/img/dept/{sp["slug"]}.webp', "doctors": list(sp["doctors"]),
+                      "kw": sorted(k for k in kw if k)})
+
+    doctors = []
+    for (name, spec, qual, cat, photo) in DOCTORS:
+        bare = name.replace("Dr. ", "").replace(".", "")
+        parts = [p for p in bare.lower().split() if len(p) > 2]
+        kw = {bare.lower(), name.lower().replace(".", "").replace("dr ", "dr ")} | {p for p in parts if p not in ("reddy", "kumar")}
+        given = next((w for w in bare.split() if len(w) > 2 and w.lower() != "mohammed"), bare)
+        doctors.append({"name": name, "short": "Dr. " + given,
+                        "spec": spec, "qual": strip(qual), "url": doc_url(name),
+                        "img": f"assets/img/doctors/{photo}-face.jpg?v={ASSET_V}" if photo else "",
+                        "ini": initials(name), "dept": doc_depts.get(name, []), "kw": sorted(kw)})
+
+    faqs = []
+    for q, a in HOME_FAQS:
+        faqs.append({"q": strip(q), "a": strip(a), "kw": sorted({w for w in words(q).split() if w not in stop and len(w) > 2})})
+    for sp in SPECIALITIES:
+        for q, a in sp["faqs"]:
+            faqs.append({"q": strip(q), "a": strip(a), "url": f'{sp["slug"]}.html',
+                         "kw": sorted({w for w in words(q).split() if w not in stop and len(w) > 2})})
+
+    kb = {
+        "v": ASSET_V, "endpoint": CHAT_LEAD_ENDPOINT,
+        "contact": {"phone": PHONE, "tel": PHONE_TEL, "emerg": EMERGENCY, "emergTel": EMERG_TEL,
+                    "wa": WA.rsplit("/", 1)[-1], "email": EMAIL, "address": ADDRESS.replace("<br>", " "),
+                    "maps": MAPS_DIR.replace("&amp;", "&")},
+        "hours": "Monday to Friday 9 AM–9 PM, Saturday 9 AM–6 PM, Sunday 10 AM–2 PM",
+        "insurers": [n.replace(" General Insurance", "").replace(" Health Insurance", "").replace(" Insurance", "")
+                     for _, n in INSURERS],
+        "depts": depts, "doctors": doctors, "faqs": faqs,
+    }
+    (OUT / "assets" / "chat-kb.js").write_text(
+        "/* generated by build.py (write_chat_kb) from the site data — do not edit by hand */\n"
+        "window.MANA_KB = " + json.dumps(kb, ensure_ascii=False, separators=(",", ":")) + ";\n", encoding="utf-8")
+    print(f"  ✓ assets/chat-kb.js  {len(depts)} departments · {len(doctors)} doctors · {len(faqs)} FAQs")
+
+
+# ══════════════════════════════════════════════════════════════
 # RUN
 # ══════════════════════════════════════════════════════════════
 def main():
@@ -1669,6 +1790,7 @@ def main():
     SPEC_PAGES.update(f'{s["slug"]}.html' for s in SPECIALITIES)
     sync_homepage_doctors()
     write_extras()
+    write_chat_kb()
     write_sitemap(["index.html"] + list(pages))
     print(f"\n{len(pages)} pages generated + sitemap.xml (index.html hand-authored; only its doctor grid is synced).")
 
