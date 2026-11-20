@@ -820,3 +820,7 @@ section.cine{padding:0}
 .fac{align-items:center}
 .fac i.fi3{width:44px;height:44px;background:none;border-radius:0;display:block}
 .fac i.fi3 .i3d{width:44px;height:44px;filter:none}
+.chips-all > span{display:inline-flex;align-items:center;gap:8px;padding:5px 14px 5px 5px}
+.chips-all.big > a,.chips-all.big > span{padding:6px 18px 6px 6px}
+.chips-all.big .dth{width:34px;height:34px;padding:0;border:0;background:var(--mint);font-size:0}
+.chips-all.big > a{font-size:15px}

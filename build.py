@@ -22,7 +22,7 @@ EMERG_TEL  = "+919966994859"
 EMAIL      = "info@wecaremana.com"
 ADDRESS    = "Plot No. 219, beside SBI Bank,<br>Mahadevapuram Colony, Gajularamaram,<br>Hyderabad — 500072"
 WA         = "https://wa.me/917995895858"
-ASSET_V    = "20261120g"   # bump when site.css / *.js change so browsers fetch the new files
+ASSET_V    = "20261120i"   # bump when site.css / *.js change so browsers fetch the new files
 # Google Business listing (from the client's share link) — pin at 17.5166458, 78.4144235
 MAPS_LISTING = "https://share.google/QCrYoUiRkgj39kQA7"
 MAPS_DIR     = "https://www.google.com/maps/dir/?api=1&amp;destination=17.5166458%2C78.4144235"
@@ -894,6 +894,25 @@ ALL_DEPARTMENTS = [
 ]
 
 
+# department name -> (illustration in assets/img/dept, speciality page slug or None)
+DEPT_ART = {
+    "General Medicine": ("general-medicine", "general-medicine"), "Nephrology": ("nephrology", "nephrology"),
+    "Pulmonology": ("pulmonology", "pulmonology"), "Endocrinology": ("diabetes-care", "diabetes-care"),
+    "Gastroenterology": ("gastroenterology", "gastroenterology"), "Surgical Gastro": ("gastroenterology", "gastroenterology"),
+    "Paediatrics": ("paediatrics", "paediatrics"), "Anaesthesiology": ("anaesthesiology", None),
+    "Neurology": ("neurology", "neurology"), "Neuro Surgery": ("neurology", "neurology"),
+    "Orthopaedics": ("orthopaedics", "orthopaedics"), "Joint Replacement": ("orthopaedics", "orthopaedics"),
+    "Spine Surgery": ("spine-surgery", None), "Cardiology": ("cardiology", None), "ENT": ("ent", "ent"),
+    "Dermatology": ("dermatology", None), "General &amp; Lap Surgery": ("general-surgery", "general-surgery"),
+    "Plastic Surgery": ("plastic-surgery", None), "Maxillofacial Surgery": ("maxillofacial", None),
+    "Physiotherapy": ("physiotherapy", None), "Radiology": ("radiology-diagnostics", "radiology-diagnostics"),
+    "Critical Care (ICU)": ("emergency-critical-care", "emergency-critical-care"),
+    "24×7 Emergency": ("emergency-critical-care", "emergency-critical-care"), "Oncology": ("oncology", None),
+    "Obstetrics &amp; Gynaecology": ("gynaecology", "gynaecology"), "Dialysis": ("nephrology", "nephrology"),
+    "Urology": ("urology", "urology"),
+}
+
+
 def build_specialities():
     cards = "\n".join(f"""      <a href="{s["slug"]}.html" class="sp has-img rise" style="--d:{(i%3)*60}ms">
         <span class="sp-img">{dimg(s["slug"], alt=f'{seo.plain(s["title"])} department, Mana Hospitals Gajularamaram')}</span>
@@ -904,7 +923,9 @@ def build_specialities():
         </div>
       </a>""" for i, s in enumerate(SPECIALITIES))
 
-    chips = "".join(f"<span>{d}</span>" for d in ALL_DEPARTMENTS)
+    chips = "".join(
+        (f'<a href="{DEPT_ART[d][1]}.html">{dthumb(DEPT_ART[d][0])}{d}</a>' if DEPT_ART[d][1]
+         else f'<span>{dthumb(DEPT_ART[d][0])}{d}</span>') for d in ALL_DEPARTMENTS)
 
     body = f"""
 {phero(crumb="Specialities", eyebrow="Departments",
