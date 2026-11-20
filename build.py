@@ -247,7 +247,7 @@ DOCTORS = [
     ("Dr. Guntaka Srujana", "Radiologist", "MBBS, MD — Radiology", "other", "guntaka-srujana"),
     ("Dr. Vidyala Harika", "General Physician", "MBBS, MD", "medicine", "vidyala-harika"),
     ("Dr. M. Kiran Kumar", "General Physician", "MBBS, MD — Internal Medicine", "medicine", None),
-    ("Dr. Juluri Vamshi Krishna", "Critical Care · Intensivist", "MBBS, MD", "critical", None),
+    ("Dr. Juluri Vamshi Krishna", "Critical Care · Intensivist", "MBBS, MD", "critical", "juluri-vamshi-krishna"),
     ("Dr. Ch. Divya", "FNB Consultant", "MBBS, MRCP, MRCPCH", "womens", "ch-divya"),
     ("Dr. G. Vaishnavi", "Consultant Paediatrician", "MD Paediatrics", "womens", "g-vaishnavi"),
     ("Dr. Manisha M", "ENT Surgeon", "MBBS, DLO — Consultant ENT", "other", "manisha-m"),
