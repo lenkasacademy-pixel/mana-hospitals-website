@@ -785,3 +785,17 @@ section.cine{padding:0}
 .doc.has-ph .doc-b{margin-top:auto}
 .doc.has-ph .doc-q{margin-bottom:14px}
 @media (max-width:720px){.doc-in{padding:12px 12px 14px}.doc.has-ph h3{font-size:15px}}
+
+/* insurer logo marquee (Nov 2026) */
+.ins-strip{margin-top:40px;border:1px solid var(--line);border-radius:var(--r-md);background:#fff;padding:22px 0 24px;overflow:hidden}
+.ins-strip-h{text-align:center;font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--mute);margin:0 0 16px}
+.ins-track{display:flex;width:max-content;animation:insScroll 45s linear infinite;-webkit-mask-image:none}
+.ins-strip{-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+.ins-strip:hover .ins-track{animation-play-state:paused}
+.ins-row{display:flex;align-items:center;gap:22px;list-style:none;margin:0;padding:0 11px}
+.ins-row li{flex:none;width:150px;height:64px;display:grid;place-items:center;border-radius:14px;background:#F7FAF8;border:1px solid var(--line);padding:10px 16px}
+.ins-row img{max-height:40px;max-width:118px;width:auto;height:auto;object-fit:contain}
+@keyframes insScroll{to{transform:translateX(-50%)}}
+@media (max-width:720px){.ins-row li{width:120px;height:56px}.ins-row img{max-width:92px;max-height:34px}.ins-track{animation-duration:35s}}
+@media (prefers-reduced-motion:reduce){.ins-track{animation:none;flex-wrap:wrap;width:auto;justify-content:center}.ins-row[aria-hidden]{display:none}.ins-row{flex-wrap:wrap;justify-content:center}}
+.ins-row img[src*="tata-aig"],.ins-row img[src*="digit"]{max-height:52px}

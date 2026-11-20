@@ -22,7 +22,7 @@ EMERG_TEL  = "+919966994859"
 EMAIL      = "info@wecaremana.com"
 ADDRESS    = "Plot No. 219, beside SBI Bank,<br>Mahadevapuram Colony, Gajularamaram,<br>Hyderabad — 500072"
 WA         = "https://wa.me/917995895858"
-ASSET_V    = "20261120c"   # bump when site.css / *.js change so browsers fetch the new files
+ASSET_V    = "20261120e"   # bump when site.css / *.js change so browsers fetch the new files
 # Google Business listing (from the client's share link) — pin at 17.5166458, 78.4144235
 MAPS_LISTING = "https://share.google/QCrYoUiRkgj39kQA7"
 MAPS_DIR     = "https://www.google.com/maps/dir/?api=1&amp;destination=17.5166458%2C78.4144235"
@@ -228,15 +228,16 @@ def ul(items):
 # photo = file stem in assets/img/doctors/<photo>-face.jpg, or None for initials
 # ══════════════════════════════════════════════════════════════
 DOCTORS = [
+    # senior consultants first (client, 20 Nov 2026)
+    ("Dr. Swaroop Chandra", "Senior Orthopaedic Surgeon", "MBBS, MS Orthopaedics", "ortho", "swaroop-chandra"),
+    ("Dr. Ramakrishna Reddy M", "Pulmonologist", "MBBS, DNE, DTCD, PCCP", "medicine", "ramakrishna-reddy"),
+    ("Dr. Sasikanth Reddy P", "Physician · Diabetologist", "MBBS, MD", "medicine", "sasikanth-reddy"),
+    ("Dr. Naresh Kumar", "Anorectal Surgeon", "MS, FMAS, FISCP", "surgery", "naresh-kumar"),
     ("Dr. Kosuri Akhila", "General Physician · Diabetologist", "MBBS, MD General Medicine, CCEBDM (Diabetology)", "medicine", "kosuri-akhila"),
     ("Dr. Madhavaram Mounika", "Consultant OBGYN &amp; Infertility Expert", "MBBS, DGO, DNB, FRM (Reproductive Medicine), FMAS", "womens", "madhavaram-mounika"),
     ("Dr. Gopala Ithihaas", "Pulmonologist", "MD — Pulmonology", "medicine", "gopala-ithihaas"),
     ("Dr. Shivaiahgari Vinaykumar", "Paediatrician", "MD Paediatrics, PGPN (Boston)", "womens", "vinaykumar"),
     ("Dr. Guntaka Srujana", "Radiologist", "MBBS, MD — Radiology", "other", "guntaka-srujana"),
-    ("Dr. Sasikanth Reddy P", "Physician · Diabetologist", "MBBS, MD", "medicine", "sasikanth-reddy"),
-    ("Dr. Ramakrishna Reddy M", "Pulmonologist", "MBBS, DNE, DTCD, PCCP", "medicine", "ramakrishna-reddy"),
-    ("Dr. Swaroop Chandra", "Senior Orthopaedic Surgeon", "MBBS, MS Orthopaedics", "ortho", "swaroop-chandra"),
-    ("Dr. Naresh Kumar", "Anorectal Surgeon", "MS, FMAS, FISCP", "surgery", "naresh-kumar"),
     ("Dr. Alekhya Patluri", "Gynaecologist", "MBBS, MS OBGY", "womens", None),
     ("Dr. Vidyala Harika", "General Physician", "MBBS, MD", "medicine", "vidyala-harika"),
     ("Dr. M. Kiran Kumar", "General Physician", "MBBS, MD — Internal Medicine", "medicine", None),
@@ -320,6 +321,29 @@ def doc_slug(name):
 
 def doc_url(name):
     return f"{doc_slug(name)}.html"
+
+
+# Insurers shown in the cashless strip (client, 20 Nov 2026: as on luxhospitals.com, minus Niva Bupa)
+INSURERS = [("star-health", "Star Health Insurance"), ("hdfc-ergo", "HDFC ERGO General Insurance"),
+            ("icici-lombard", "ICICI Lombard General Insurance"), ("care-health", "Care Health Insurance"),
+            ("bajaj-allianz", "Bajaj Allianz General Insurance"), ("aditya-birla", "Aditya Birla Health Insurance"),
+            ("manipal-cigna", "ManipalCigna Health Insurance"), ("tata-aig", "TATA AIG General Insurance"),
+            ("sbi-general", "SBI General Insurance"), ("reliance-general", "Reliance General Insurance"),
+            ("digit", "Digit Insurance"), ("acko", "ACKO General Insurance"),
+            ("kotak-general", "Kotak General Insurance"), ("chola-ms", "Chola MS General Insurance"),
+            ("royal-sundaram", "Royal Sundaram General Insurance")]
+
+
+def insurers_strip():
+    """Infinite logo marquee; the list is rendered twice so the loop is seamless (second copy aria-hidden)."""
+    def row(hidden):
+        items = "".join(
+            f'<li><img src="assets/img/insurers/{k}.webp?v={ASSET_V}" alt="{"" if hidden else n + " logo"}" '
+            f'loading="lazy" decoding="async" height="40"></li>' for k, n in INSURERS)
+        return f'<ul class="ins-row"{" aria-hidden=\"true\"" if hidden else ""}>{items}</ul>'
+    return (f'<div class="ins-strip" role="region" aria-label="Insurance partners for cashless treatment">'
+            f'<p class="ins-strip-h">Cashless with {len(INSURERS)}+ insurers &amp; TPAs</p>'
+            f'<div class="ins-track">{row(False)}{row(True)}</div></div>')
 
 
 def doctor_cards():
@@ -1204,6 +1228,8 @@ def build_book():
        lede="Fill in the form and it opens WhatsApp with your details ready to send — or call reception "
             "directly. OPD runs seven days a week; emergency care never closes.", cta=False)}
 
+<section style="padding-bottom:0"><div class="wrap">{insurers_strip()}</div></section>
+
 <section>
   <div class="wrap pgrid">
     <div class="formcard rise">
@@ -1579,6 +1605,9 @@ Sitemap: {seo.SITE}/sitemap.xml
     a, z = "<!-- FAQ:START -->", "<!-- FAQ:END -->"
     if a in s and z in s:
         s = s[:s.index(a) + len(a)] + "\n" + home_faq_html() + "\n      " + s[s.index(z):]
+    a, z = "<!-- INSURERS:START -->", "<!-- INSURERS:END -->"
+    if a in s and z in s:
+        s = s[:s.index(a) + len(a)] + "\n    " + insurers_strip() + "\n    " + s[s.index(z):]
     a, z = "<!-- SPECLINKS:START -->", "<!-- SPECLINKS:END -->"
     if a in s and z in s:
         s = s[:s.index(a) + len(a)] + "".join(f'<li><a href="{x["slug"]}.html">{x["nav"]}</a></li>' for x in SPECIALITIES) + s[s.index(z):]
