@@ -180,7 +180,7 @@
     var h = (why ? why + '<br><br>' : '') + '<b>' + d.name + '</b> — ' + d.lede +
             '<div class="mc-cards">' + deptCard(d) + docs.slice(0, 3).map(docCard).join('') + '</div>';
     say(h, { after: function () {
-      setChips([{ label: 'Book ' + d.short, act: 'book', arg: { dept: d.slug }, primary: true },
+      next([{ label: 'Book ' + d.short, act: 'book', arg: { dept: d.slug }, primary: true },
                 { label: 'Timings & location', act: 'where' }, { label: 'Insurance / cashless', act: 'insurance' }, { label: 'Something else', act: 'menu' }]);
     } });
   }
@@ -189,7 +189,7 @@
     S.topics.push(d.name); save();
     say('<div class="mc-cards">' + docCard(d) + '</div>' + esc(d.name) + ' — ' + d.spec + (d.qual ? ' (' + d.qual + ')' : '') +
         '. Consultations are by appointment; the front desk will confirm the next available slot.', { after: function () {
-      setChips([{ label: 'Book with ' + d.short, act: 'book', arg: { doctor: d.name, dept: d.dept[0] }, primary: true },
+      next([{ label: 'Book with ' + d.short, act: 'book', arg: { doctor: d.name, dept: d.dept[0] }, primary: true },
                 { label: 'Timings & location', act: 'where' }, { label: 'Something else', act: 'menu' }]);
     } });
   }
@@ -198,14 +198,14 @@
     say('<b>Mana Hospitals</b><br>' + c.address + '<br><br><b>OPD:</b> ' + KB.hours + '<br><b>Emergency &amp; ICU:</b> open 24×7' +
         '<div class="mc-acts"><a class="mc-btn" href="' + esc(c.maps) + '" target="_blank" rel="noopener">Get directions</a>' +
         '<a class="mc-btn ghost" href="tel:' + esc(c.tel) + '">Call ' + esc(c.phone) + '</a></div>', { after: function () {
-      setChips([{ label: 'Book an appointment', act: 'book', primary: true }, { label: 'Find a doctor', act: 'finddoc' }, { label: 'Something else', act: 'menu' }]);
+      next([{ label: 'Book an appointment', act: 'book', primary: true }, { label: 'Find a doctor', act: 'finddoc' }, { label: 'Something else', act: 'menu' }]);
     } });
   }
   function answerInsurance() {
     say('Yes — we support <b>cashless</b> treatment and reimbursement claims. Our insurance desk verifies your policy, raises pre-authorisation and follows the claim to settlement.' +
         '<br><br><b>Insurers we work with include:</b> ' + KB.insurers.join(', ') + ', and major TPAs.' +
         '<br><br>Bring your policy card and a photo ID. Want us to check your policy before you come?', { after: function () {
-      setChips([{ label: 'Yes, check my policy', act: 'book', arg: { concern: 'Insurance / cashless check' }, primary: true },
+      next([{ label: 'Yes, check my policy', act: 'book', arg: { concern: 'Insurance / cashless check' }, primary: true },
                 { label: 'Find a doctor', act: 'finddoc' }, { label: 'Something else', act: 'menu' }]);
     } });
   }
@@ -249,6 +249,7 @@
     if (EMERG.test(t)) return answerEmergency();
 
     // in the middle of the lead form, treat text as the answer
+    if (S.step === 'cname' || S.step === 'cphone') return contactInput(raw.trim());
     if (S.step) return leadInput(raw);
 
     var doc = scoreList(t, KB.doctors, function (d) { return d.kw; });
@@ -279,7 +280,7 @@
         var c = [{ label: 'Book an appointment', act: 'book', arg: dept ? { dept: dept.item.slug } : {}, primary: true }];
         if (dept) c.push({ label: 'About ' + dept.item.short, act: 'dept', arg: dept.item.slug });
         c.push({ label: 'Ask something else', act: 'menu' });
-        setChips(c);
+        next(c);
       } });
     }
 
@@ -287,7 +288,7 @@
     if (intent === 'cost') {
       var dc = dept ? dept.item : null;
       return say('Costs depend on the consultant, tests and treatment you need' + (dc ? ' in <b>' + dc.short + '</b>' : '') + ', so we don\'t quote fixed prices here. Our front desk will give you a clear estimate before anything starts — and cashless insurance is supported.', { after: function () {
-        setChips([{ label: 'Get a call with an estimate', act: 'book', arg: dc ? { dept: dc.slug, concern: 'Cost estimate — ' + dc.short } : { concern: 'Cost estimate' }, primary: true },
+        next([{ label: 'Get a call with an estimate', act: 'book', arg: dc ? { dept: dc.slug, concern: 'Cost estimate — ' + dc.short } : { concern: 'Cost estimate' }, primary: true },
                   { label: 'Insurance / cashless', act: 'insurance' }, { label: 'Something else', act: 'menu' }]);
       } });
     }
@@ -298,22 +299,104 @@
     if (intent === 'finddoc') return act('finddoc');
     if (faq && faq.score >= 4) {
       return say(faq.item.a + (faq.item.url ? ' <a href="' + esc(faq.item.url) + '">Read more →</a>' : ''), { after: function () {
-        setChips([{ label: 'Book an appointment', act: 'book', primary: true }, { label: 'Ask something else', act: 'menu' }]);
+        next([{ label: 'Book an appointment', act: 'book', primary: true }, { label: 'Ask something else', act: 'menu' }]);
       } });
     }
     if (intent === 'hello') return say('Hello! How can I help you today?', { fast: true, after: function () { mainChips(); } });
     if (intent === 'thanks') return say('You\'re welcome. Take care! If you need anything else, I\'m right here.', { fast: true, after: function () { mainChips(); } });
 
     say('I\'m not sure I have the right answer for that. The quickest way is to have our team call you — it takes 20 seconds to request.', { after: function () {
-      setChips([{ label: 'Request a call back', act: 'book', arg: { concern: raw.slice(0, 120) }, primary: true },
+      next([{ label: 'Request a call back', act: 'book', arg: { concern: raw.slice(0, 120) }, primary: true },
                 { label: 'Call ' + KB.contact.phone, act: 'wa', arg: 'call' }, { label: 'Show options', act: 'menu' }]);
     } });
+  }
+
+
+  /* ------------------------------------------------ contact gate: after the first answer, ask name + mobile, then push a call */
+  var CALL_CHIP = { label: '📞 Call now', act: 'wa', arg: 'call', primary: true };
+  function next(list) {
+    if (S.contact) return setChips([CALL_CHIP].concat(list.map(function (x) { return Object.assign({}, x, { primary: false }); })).slice(0, 5));
+    if (S.step) return setChips(list);
+    return askContact(list);
+  }
+  function askContact(pending) {
+    S.pending = pending; S.step = 'cname'; save();
+    track('mana_chat_contact_ask');
+    say('So our care team can help you properly, may I have your <b>name</b>? 🙂', { after: function () {
+      setChips([{ label: '📞 Call instead', act: 'wa', arg: 'call' }]);
+      input.placeholder = 'Your name'; input.focus();
+    } });
+  }
+  function looksLikeQuestion(v) {
+    return /\?/.test(v) || v.split(/\s+/).length > 4 ||
+      /^(do|does|is|are|can|what|which|when|how|where|why|i want|i need|my )/i.test(v.trim());
+  }
+  function contactInput(v) {
+    if (S.step === 'cname') {
+      if (looksLikeQuestion(v)) { S.deferQ = v; save(); return say('I\'ll answer that right away — first, may I have your <b>name</b>?', { fast: true }); }
+      if (v.length < 2 || /\d{4,}/.test(v)) return say('Please type your name (for example <i>Ravi Kumar</i>).', { fast: true });
+      S.contactName = v.replace(/\s+/g, ' ').slice(0, 60); S.step = 'cphone'; save();
+      return say('Thanks, ' + esc(S.contactName.split(' ')[0]) + '! And your <b>mobile number</b>? Our team will call you back with the right doctor and the next available slot.', { after: function () {
+        setChips([{ label: '📞 Call instead', act: 'wa', arg: 'call' }]);
+        input.placeholder = '10-digit mobile number'; input.setAttribute('inputmode', 'tel'); input.focus();
+      } });
+    }
+    if (S.step === 'cphone') {
+      var d = v.replace(/\D/g, '').replace(/^(91|0)(?=\d{10}$)/, '');
+      if (!/^[6-9]\d{9}$/.test(d)) return say('That doesn\'t look like a 10-digit mobile number. Could you check it?', { fast: true });
+      S.contact = { name: S.contactName, phone: d }; S.step = null; save();
+      input.removeAttribute('inputmode'); input.placeholder = 'Type your question…';
+      submitEnquiry();
+      return insistCall();
+    }
+  }
+  function payloadBase(extra) {
+    var a = store.get('mana_attr', {}, true);
+    return Object.assign({}, a, {
+      questions: S.asked.slice(-8).join(' | '), topics: S.topics.slice(-8).join(', '),
+      page: location.pathname, device: /Mobi|Android/i.test(navigator.userAgent) ? 'mobile' : 'desktop',
+      consent: 'yes — shared in chat ' + new Date().toISOString()
+    }, extra);
+  }
+  function post(payload) {
+    if (!KB.endpoint) return;
+    try { fetch(KB.endpoint, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(payload), keepalive: true }); } catch (e) {}
+  }
+  function submitEnquiry() {
+    var c = S.contact, topic = S.topics[S.topics.length - 1] || '';
+    var dm = KB.depts.filter(function (x) { return x.short === topic; })[0];
+    post(payloadBase({ id: 'mc-' + Date.now().toString(36) + Math.random().toString(36).slice(2, 6), name: c.name, phone: c.phone,
+      department: dm ? dm.short : '', doctor: docBy[topic] ? topic : '', concern: S.asked[0] || topic || 'Chat enquiry',
+      callback_time: 'Call back — chat enquiry', source_form: 'mana-chat-enquiry' }));
+    track('mana_chat_lead', { type: 'contact', dept: dm ? dm.short : '' });
+  }
+  function enquiryMessage() {
+    var c = S.contact;
+    return 'Hello Mana Hospitals, I have a query from your website chat.\nName: ' + c.name + '\nMobile: ' + c.phone +
+           (S.asked.length ? '\nQuestion: ' + S.asked[0] : '') + (S.topics.length ? '\nAbout: ' + S.topics.slice(-3).join(', ') : '') +
+           '\nPlease call me back.';
+  }
+  function insistCall() {
+    var c = S.contact, k = KB.contact;
+    say('<div class="mc-callcard"><b>Thank you, ' + esc(c.name.split(' ')[0]) + '!</b> The quickest way to get the right help is a 2-minute call — our front desk is available now and can book you in straight away.' +
+        '<a class="mc-btn call" href="tel:' + esc(k.tel) + '" data-call>📞 Call now · ' + k.tel.slice(-10).replace(/(\d{5})(\d{5})/, '$1 $2') + '</a>' +
+        '<a class="mc-btn green" href="' + waLink(enquiryMessage()) + '" target="_blank" rel="noopener" data-wa>Or send on WhatsApp</a></div>' +
+        (KB.endpoint ? 'We\'ve noted <b>' + esc(c.phone) + '</b> — if you can\'t call now, we\'ll call you back shortly.' : 'Can\'t call right now? Tap <b>WhatsApp</b> and we\'ll call you back.'),
+      { after: function () {
+        var p = S.pending || []; S.pending = null; save();
+        setChips([CALL_CHIP].concat(p.filter(function (x) { return !x.primary; }).slice(0, 3)));
+        root.classList.add('called');
+        if (S.deferQ) { var q = S.deferQ; S.deferQ = null; save(); setTimeout(function () { understand(q); }, 700); }
+      } });
+    track('mana_chat_contact');
   }
 
   /* ------------------------------------------------ lead capture */
   function startLead(pre) {
     S.lead = Object.assign({ dept: '', doctor: '', concern: '' }, S.lead && !S.lead.done ? S.lead : {}, pre);
     if (pre.dept && deptBy[pre.dept] && !S.lead.concern) S.lead.concern = deptBy[pre.dept].short;
+    if (S.contact && !S.lead.phone) { S.lead.name = S.contact.name; S.lead.phone = S.contact.phone; }
+    if (S.step === 'cname' || S.step === 'cphone') S.step = null;
     save();
     track('mana_chat_book_start', { dept: S.lead.dept || '', doctor: S.lead.doctor || '' });
     if (S.lead.name && S.lead.phone) return askConcern();
@@ -335,7 +418,7 @@
     if (S.step === 'phone') {
       var d = v.replace(/\D/g, '').replace(/^(91|0)(?=\d{10}$)/, '');
       if (!/^[6-9]\d{9}$/.test(d)) return say('That doesn\'t look like a 10-digit Indian mobile number. Could you check it?', { fast: true });
-      S.lead.phone = d; S.step = null; save();
+      S.lead.phone = d; S.step = null; S.contact = S.contact || { name: S.lead.name, phone: d }; save();
       input.removeAttribute('inputmode'); input.placeholder = 'Type your question…';
       return askConcern();
     }
@@ -395,11 +478,7 @@
       page: location.pathname, device: /Mobi|Android/i.test(navigator.userAgent) ? 'mobile' : 'desktop',
       consent: 'yes — ' + new Date().toISOString(), source_form: 'mana-chat'
     });
-    if (KB.endpoint) {
-      try {
-        fetch(KB.endpoint, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(payload), keepalive: true });
-      } catch (e) {}
-    }
+    post(payload);
     track('mana_chat_lead', { dept: payload.department, doctor: payload.doctor });
     var msg = KB.endpoint
       ? '✅ <b>Request received.</b> Our front desk will call ' + esc(L.name.split(' ')[0]) + ' on <b>' + esc(L.phone) + '</b> shortly' + (/today/i.test(L.when) ? ' to confirm a slot today' : '') + '.<br><br>Want a faster reply? Send it on WhatsApp too.'
@@ -411,10 +490,10 @@
   }
   function waLink(text) { return 'https://wa.me/' + KB.contact.wa + '?text=' + encodeURIComponent(text); }
   function openWA(arg) {
-    if (arg === 'call') { location.href = 'tel:' + KB.contact.tel; return; }
+    if (arg === 'call') { track('mana_chat_call'); location.href = 'tel:' + KB.contact.tel; return; }
     window.open(waLink(arg || 'Hello Mana Hospitals'), '_blank', 'noopener');
   }
-  log.addEventListener('click', function (e) { if (e.target.closest('[data-wa]')) track('mana_chat_whatsapp'); });
+  log.addEventListener('click', function (e) { if (e.target.closest('[data-wa]')) track('mana_chat_whatsapp'); if (e.target.closest('[data-call]')) track('mana_chat_call'); });
 
   /* ------------------------------------------------ open / close */
   function open() {

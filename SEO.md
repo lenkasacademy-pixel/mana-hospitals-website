@@ -84,6 +84,9 @@ events; doctor guest articles; insurer/TPA network pages.
 - Understands symptoms in plain words ("knee pain", "sugar", "child fever", "piles bleeding"), doctor names, timings,
   location, insurance/insurer names, costs (never quotes prices), and routes emergencies (chest pain, accident…) straight
   to the emergency number. Answers the site FAQs (e.g. "do you do IVF?").
+- **Contact gate (client, 20 Nov):** after the bot's first answer it asks for name → mobile (a question typed meanwhile is
+  answered right after), sends that as an enquiry lead, then shows a big "Call now" card + WhatsApp; every later reply
+  keeps a "📞 Call now" chip first. Emergencies skip the gate.
 - Lead flow: patient name → mobile (Indian 10-digit check) → concern/department → when → consent → submit.
   Leads go to **WhatsApp (79958 95858) pre-filled** and, once set, to a **Google Sheet + email** via
   `tools/lead-collector.gs` (paste into Apps Script, deploy as web app, put the /exec URL in `CHAT_LEAD_ENDPOINT`).
