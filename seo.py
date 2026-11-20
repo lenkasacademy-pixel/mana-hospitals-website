@@ -91,7 +91,8 @@ def dept_node(s):
             "name": f'{plain(s["title"])} — {NAME} Gajularamaram', "url": f'{SITE}/{s["slug"]}.html',
             "medicalSpecialty": s["specialty"], "parentOrganization": {"@id": HOSPITAL_ID},
             "address": postal(), "geo": geo(), "telephone": PHONE_SCHEMA,
-            "image": SITE + "/assets/img/building.jpg", "priceRange": "₹₹",
+            "image": [f'{SITE}/assets/img/dept/{s["slug"]}.webp', SITE + "/assets/img/building.jpg"],
+            "priceRange": "₹₹",
             "openingHoursSpecification": [{"@type": "OpeningHoursSpecification",
                 "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
                 "opens": "00:00", "closes": "23:59"}]}

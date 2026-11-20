@@ -22,7 +22,7 @@ EMERG_TEL  = "+919966994859"
 EMAIL      = "info@wecaremana.com"
 ADDRESS    = "Plot No. 219, beside SBI Bank,<br>Mahadevapuram Colony, Gajularamaram,<br>Hyderabad — 500072"
 WA         = "https://wa.me/917995895858"
-ASSET_V    = "20261118m"   # bump when site.css / *.js change so browsers fetch the new files
+ASSET_V    = "20261120c"   # bump when site.css / *.js change so browsers fetch the new files
 # Google Business listing (from the client's share link) — pin at 17.5166458, 78.4144235
 MAPS_LISTING = "https://share.google/QCrYoUiRkgj39kQA7"
 MAPS_DIR     = "https://www.google.com/maps/dir/?api=1&amp;destination=17.5166458%2C78.4144235"
@@ -243,7 +243,7 @@ DOCTORS = [
     ("Dr. Juluri Vamshi Krishna", "Critical Care · Intensivist", "MBBS, MD", "critical", None),
     ("Dr. Mohammed Adil Faraz", "General Surgeon", "MBBS, MS", "surgery", "adil-faraz"),
     ("Dr. Bagam Mahesh", "Orthopaedic Surgeon", "MBBS, D.Ortho, DNB", "ortho", "bagam-mahesh"),
-    ("Dr. Ch. Divya", "FNB Consultant", "MBBS, MRCP, MRCPCH", "womens", None),
+    ("Dr. Ch. Divya", "FNB Consultant", "MBBS, MRCP, MRCPCH", "womens", "ch-divya"),
     ("Dr. G. Vaishnavi", "Consultant Paediatrician", "MD Paediatrics", "womens", "g-vaishnavi"),
     ("Dr. Manisha M", "ENT Surgeon", "MBBS, DLO — Consultant ENT", "other", "manisha-m"),
 ]
@@ -326,9 +326,14 @@ def doctor_cards():
     out = []
     for i, (name, spec, qual, cat, photo) in enumerate(DOCTORS):
         u = doc_url(name)
-        out.append(f'      <article class="doc" data-c="{cat}"><a class="doc-top" href="{u}">{avatar(name, photo, i)}'
-                   f'<h3>{name}</h3></a><div class="doc-sp">{spec}</div><p class="doc-q">{qual}</p>'
-                   f'<a href="{u}" class="doc-b">View profile</a></article>')
+        if photo:
+            ph = (f'<img src="assets/img/doctors/{photo}-card.jpg?v={ASSET_V}" alt="{name}, {seo.plain(spec)} at Mana Hospitals Gajularamaram" '
+                  f'loading="lazy" decoding="async" width="420" height="420">')
+        else:
+            ph = f'<span class="doc-ini" style="background:{AV_COLOURS[i % 6]}">{initials(name)}</span>'
+        out.append(f'      <article class="doc has-ph" data-c="{cat}"><a class="doc-ph" href="{u}" tabindex="-1" aria-hidden="true">{ph}</a>'
+                   f'<div class="doc-in"><a class="doc-top" href="{u}"><h3>{name}</h3></a><div class="doc-sp">{spec}</div>'
+                   f'<p class="doc-q">{qual}</p><a href="{u}" class="doc-b">View profile</a></div></article>')
     return "\n".join(out)
 
 
@@ -698,6 +703,18 @@ def plain_title(s):
     return seo.plain(s["title"]).split(" (")[0]
 
 
+def dimg(slug, alt="", lazy=True, cls=""):
+    """Department 3D illustration (assets/img/dept/<slug>.webp, 800x600)."""
+    return (f'<img src="assets/img/dept/{slug}.webp?v={ASSET_V}" alt="{alt}" width="800" height="600"'
+            f'{" loading=\"lazy\"" if lazy else ""} decoding="async"{f" class=\"{cls}\"" if cls else ""}>')
+
+
+def dthumb(slug):
+    """Small decorative thumbnail for department lists (like a nav mega-menu)."""
+    return (f'<span class="dth" aria-hidden="true"><img src="assets/img/dept/{slug}.webp?v={ASSET_V}" alt="" '
+            f'width="800" height="600" loading="lazy" decoding="async"></span>')
+
+
 def icon(slug):
     return (f'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" '
             f'stroke-linecap="round" stroke-linejoin="round">{SPEC_ICONS.get(slug, "")}</svg>')
@@ -709,7 +726,7 @@ def icon(slug):
 def build_speciality(s):
     others = [o for o in SPECIALITIES if o["slug"] != s["slug"]]
     rail_links = "\n".join(
-        f'          <a href="{o["slug"]}.html">{o["nav"]} {CHEV}</a>' for o in others[:6])
+        f'          <a href="{o["slug"]}.html">{dthumb(o["slug"])}<span class="dtx">{o["nav"]}</span> {CHEV}</a>' for o in others[:6])
 
     docs = ""
     if s["doctors"]:
@@ -724,7 +741,7 @@ def build_speciality(s):
       <a href="doctors.html" class="morelink">See all {N_DOCS} consultants →</a>"""
 
     rel = "\n".join(
-        f'      <a href="{o["slug"]}.html">{o["nav"]} {CHEV}</a>' for o in others[:3])
+        f'      <a href="{o["slug"]}.html">{dthumb(o["slug"])}<span class="dtx">{o["nav"]}</span> {CHEV}</a>' for o in others[:3])
 
     term = s.get("term", "specialist")
     docnames = [n for n in s["doctors"] if n in DOC_BY_NAME]
@@ -762,7 +779,8 @@ def build_speciality(s):
 
 <section>
   <div class="wrap pgrid">
-    <div class="prose">{glance}
+    <div class="prose">
+      <figure class="sp-hero">{dimg(s["slug"], alt=f'{plain_title(s)} at Mana Hospitals, Gajularamaram, Hyderabad', lazy=False)}</figure>{glance}
       <h3>Overview</h3>
       <p>{s["overview"]}</p>
 
@@ -829,6 +847,7 @@ def build_speciality(s):
                                  f'{seo.plain(s.get("seo_kw", s["title"]))} | Mana Hospitals Gajularamaram'),
                  desc=fit_desc(s["meta"]), body=body, kind="MedicalWebPage", about=about,
                  crumbs=[("Specialities", "specialities.html"), (s["nav"], None)],
+                 og_image=f'{seo.SITE}/assets/img/dept/{s["slug"]}.webp',
                  faqs=all_faqs, extra=[clinic])
 
 
@@ -846,11 +865,13 @@ ALL_DEPARTMENTS = [
 
 
 def build_specialities():
-    cards = "\n".join(f"""      <a href="{s["slug"]}.html" class="sp rise" style="--d:{(i%3)*60}ms">
-        <span class="sp-ic">{icon(s["slug"])}</span>
-        <h3>{s["title"]}</h3>
-        <p>{s["lede"]}</p>
-        <span class="sp-go">Learn more {ARROW}</span>
+    cards = "\n".join(f"""      <a href="{s["slug"]}.html" class="sp has-img rise" style="--d:{(i%3)*60}ms">
+        <span class="sp-img">{dimg(s["slug"], alt=f'{seo.plain(s["title"])} department, Mana Hospitals Gajularamaram')}</span>
+        <div class="sp-body">
+          <h3>{s["title"]}</h3>
+          <p>{s["lede"]}</p>
+          <span class="sp-go">Learn more {ARROW}</span>
+        </div>
       </a>""" for i, s in enumerate(SPECIALITIES))
 
     chips = "".join(f"<span>{d}</span>" for d in ALL_DEPARTMENTS)
@@ -864,7 +885,7 @@ def build_specialities():
 <section>
   <div class="wrap">
     {shead("Detailed departments", "Where we go <i>deepest.</i>",
-           "Eight departments with dedicated consultants, on-site procedures and their own care pathways.")}
+           f"{len(SPECIALITIES)} departments with dedicated consultants, on-site procedures and their own care pathways.")}
     <div class="sgrid">
 {cards}
     </div>
