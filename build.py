@@ -228,22 +228,22 @@ def ul(items):
 # photo = file stem in assets/img/doctors/<photo>-face.jpg, or None for initials
 # ══════════════════════════════════════════════════════════════
 DOCTORS = [
-    # senior consultants first (client, 20 Nov 2026)
+    # display order set by client (20 Nov 2026): senior four, then Adil, Mahesh, Alekhya, Mounika
     ("Dr. Swaroop Chandra", "Senior Orthopaedic Surgeon", "MBBS, MS Orthopaedics", "ortho", "swaroop-chandra"),
     ("Dr. Ramakrishna Reddy M", "Pulmonologist", "MBBS, DNE, DTCD, PCCP", "medicine", "ramakrishna-reddy"),
     ("Dr. Sasikanth Reddy P", "Physician · Diabetologist", "MBBS, MD", "medicine", "sasikanth-reddy"),
     ("Dr. Naresh Kumar", "Anorectal Surgeon", "MS, FMAS, FISCP", "surgery", "naresh-kumar"),
-    ("Dr. Kosuri Akhila", "General Physician · Diabetologist", "MBBS, MD General Medicine, CCEBDM (Diabetology)", "medicine", "kosuri-akhila"),
+    ("Dr. Mohammed Adil Faraz", "General Surgeon", "MBBS, MS", "surgery", "adil-faraz"),
+    ("Dr. Bagam Mahesh", "Orthopaedic Surgeon", "MBBS, D.Ortho, DNB", "ortho", "bagam-mahesh"),
+    ("Dr. Alekhya Patluri", "Gynaecologist", "MBBS, MS OBGY", "womens", None),
     ("Dr. Madhavaram Mounika", "Consultant OBGYN &amp; Infertility Expert", "MBBS, DGO, DNB, FRM (Reproductive Medicine), FMAS", "womens", "madhavaram-mounika"),
+    ("Dr. Kosuri Akhila", "General Physician · Diabetologist", "MBBS, MD General Medicine, CCEBDM (Diabetology)", "medicine", "kosuri-akhila"),
     ("Dr. Gopala Ithihaas", "Pulmonologist", "MD — Pulmonology", "medicine", "gopala-ithihaas"),
     ("Dr. Shivaiahgari Vinaykumar", "Paediatrician", "MD Paediatrics, PGPN (Boston)", "womens", "vinaykumar"),
     ("Dr. Guntaka Srujana", "Radiologist", "MBBS, MD — Radiology", "other", "guntaka-srujana"),
-    ("Dr. Alekhya Patluri", "Gynaecologist", "MBBS, MS OBGY", "womens", None),
     ("Dr. Vidyala Harika", "General Physician", "MBBS, MD", "medicine", "vidyala-harika"),
     ("Dr. M. Kiran Kumar", "General Physician", "MBBS, MD — Internal Medicine", "medicine", None),
     ("Dr. Juluri Vamshi Krishna", "Critical Care · Intensivist", "MBBS, MD", "critical", None),
-    ("Dr. Mohammed Adil Faraz", "General Surgeon", "MBBS, MS", "surgery", "adil-faraz"),
-    ("Dr. Bagam Mahesh", "Orthopaedic Surgeon", "MBBS, D.Ortho, DNB", "ortho", "bagam-mahesh"),
     ("Dr. Ch. Divya", "FNB Consultant", "MBBS, MRCP, MRCPCH", "womens", "ch-divya"),
     ("Dr. G. Vaishnavi", "Consultant Paediatrician", "MD Paediatrics", "womens", "g-vaishnavi"),
     ("Dr. Manisha M", "ENT Surgeon", "MBBS, DLO — Consultant ENT", "other", "manisha-m"),
